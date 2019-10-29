@@ -19,7 +19,11 @@ sb_replace_files <- function(sb_id, ..., file_hash){
   
 }
 
-sb_render_post_xml <- function(sb_id, xml_file, ...){
+sb_render_post_xml <- function(sb_id, ..., xml_file = NULL){
+  
+  if (is.null(xml_file)){
+    xml_file <- file.path(tempdir(), paste0(sb_id,'.xml'))
+  }
   
   render(filename = xml_file, ...)
   
