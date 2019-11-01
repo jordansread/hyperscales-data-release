@@ -1,6 +1,7 @@
 
 include:
-  - 1_spatial.yml
+  - 3_observations.yml
+  - 5_predictions.yml
 
 packages:
   - yaml
@@ -35,9 +36,14 @@ targets:
       - 01_spatial_sb_xml
       - 01_spatial_sb_data
       - 02_config_sb_xml
+      - 02_config_sb_data
       - 03_observations_sb_xml
+      - 03_observations_sb_data
       - 04_inputs_sb_xml
+      - 04_inputs_sb_data
+      - 04_inputs_sb_ice
       - 05_predictions_sb_xml
+      #- 05_predictions_sb_data
       - 06_habitat_sb_xml
 
 
@@ -68,21 +74,41 @@ targets:
     command: sb_render_post_xml(sbid_02_config,
       "in_text/text_SHARED.yml",
       "in_text/text_02_config.yml")
-
+      
+  02_config_sb_data:
+    command: sb_replace_files(sbid_02_config,
+      "out_data/pb0_config.json")
+      
   03_observations_sb_xml:
     command: sb_render_post_xml(sbid_03_observations,
       "in_text/text_SHARED.yml",
       "in_text/text_03_observations.yml")
+      
+  03_observations_sb_data:
+    command: sb_replace_files(sbid_03_observations,
+      "out_data/03_temperature_observations.zip")
 
   04_inputs_sb_xml:
     command: sb_render_post_xml(sbid_04_inputs,
       "in_text/text_SHARED.yml",
       "in_text/text_04_inputs.yml")
+      
+  04_inputs_sb_data:
+    command: sb_replace_files(sbid_04_inputs,
+      file_hash = "out/4_inputs_zips.yml")
+  
+  04_inputs_sb_ice:
+    command: sb_replace_files(sbid_04_inputs,
+      file_hash = "out/4_ice_flags_zips.yml")
 
   05_predictions_sb_xml:
     command: sb_render_post_xml(sbid_05_predictions,
       "in_text/text_SHARED.yml",
       "in_text/text_05_predictions.yml")
+  
+  05_predictions_sb_data:
+    command: sb_replace_files(sbid_05_predictions,
+      file_hash = "out/5_predictions_zips.yml")
 
   06_habitat_sb_xml:
     command: sb_render_post_xml(sbid_06_habitat,
