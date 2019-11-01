@@ -1,0 +1,27 @@
+
+
+target_default: 3_observations
+
+packages:
+  - yaml
+  - whisker
+  - dplyr
+  - tidyr
+  - meddle
+  - readr
+  - rgdal
+  - stringr
+  - glmtools
+  - sf
+
+
+sources:
+  - src/file_utils.R
+
+targets:
+  3_observations:
+    depends:
+      - out_data/03_temperature_observations.zip
+
+  out_data/03_temperature_observations.zip:
+    command: zip_temp_obs(target_name, '~/Downloads/SAM_merged_temp_data_daily.feather')

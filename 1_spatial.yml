@@ -17,6 +17,7 @@ packages:
 sources:
   - src/spatial_utils.R
   - src/file_utils.R
+  - src/group_utils.R
 
 targets:
   1_spatial:
@@ -25,14 +26,29 @@ targets:
 
 
   modeled_lake_ids:
-    command: extract_model_ids(
-      hypso_fl = "../lake-temperature-model-prep/7_config_merge/out/nml_H_A_values.rds",
-      meteo_fl = "../lake-temperature-model-prep/7_config_merge/out/nml_meteo_fl_values.rds")
-    
+    command: extract_model_ids(pb0_job_list = '../lake-temperature-process-models/2_prep/out/glm_pb0_array.rds', 
+      results_dir = I('../lake-temperature-process-models/3_run/sync'),
+      dummy = I('2019-10-30'))
+  
+  spatial_groups:
+    command: generate_lat_lon_groups(
+      x0 = I(-99), y0 = I(41), x_num = I(9), y_num = I(5), cell_res = I(2))
+
+  
   modeled_lakes_sf:
     command: subset_lake_sf(
       lakes_sf_fl = "../lake-temperature-model-prep/1_crosswalk_fetch/out/canonical_lakes_sf.rds",
       site_ids = modeled_lake_ids)
+  
+  modeled_centroids_sf:
+    command: st_centroid(modeled_lakes_sf)
+  
+  site_ids_grouped:
+    command: assign_group_id(modeled_centroids_sf, spatial_groups)
+    
+    
+# all_lakes_simple <- st_transform(modeled_lakes_sf, crs = "+init=epsg:2811") %>% sf::st_simplify(dTolerance = 40) %>% mutate(area = st_area(Shape) %>% as.numeric) %>%
+#    filter(area < 11196632079) %>% st_transform(crs = "+init=epsg:4326")
   
   spatial_metadata:
     command: extract_feature(modeled_lakes_sf)
