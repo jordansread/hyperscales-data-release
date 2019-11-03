@@ -41,9 +41,9 @@ targets:
       - 03_observations_sb_data
       - 04_inputs_sb_xml
       - 04_inputs_sb_data
-      - 04_inputs_sb_ice
+      #- 04_inputs_sb_ice
       - 05_predictions_sb_xml
-      #- 05_predictions_sb_data
+      - 05_predictions_sb_data # upload these manually w/ the large file uploader
       - 06_habitat_sb_xml
 
 
@@ -68,7 +68,8 @@ targets:
       
   01_spatial_sb_data:
     command: sb_replace_files(sbid_01_spatial,
-      "out_data/1_spatial.zip")
+      "out_data/1_spatial.zip",
+      "out_data/lake_metadata.csv")
 
   02_config_sb_xml:
     command: sb_render_post_xml(sbid_02_config,
@@ -95,7 +96,7 @@ targets:
       
   04_inputs_sb_data:
     command: sb_replace_files(sbid_04_inputs,
-      file_hash = "out/4_inputs_zips.yml")
+      'out_data/group_map.png') #file_hash = "out/4_inputs_zips.yml")
   
   04_inputs_sb_ice:
     command: sb_replace_files(sbid_04_inputs,
@@ -108,7 +109,7 @@ targets:
   
   05_predictions_sb_data:
     command: sb_replace_files(sbid_05_predictions,
-      file_hash = "out/5_predictions_zips.yml")
+      'out_data/group_map.png') #file_hash = "out/5_predictions_zips.yml")
 
   06_habitat_sb_xml:
     command: sb_render_post_xml(sbid_06_habitat,

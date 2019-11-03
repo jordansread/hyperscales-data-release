@@ -10,7 +10,13 @@ extract_model_ids <- function(pb0_job_list, results_dir, dummy){
   
 }
 
-
+create_metadata_file <- function(fileout, sites, lat_lon_fl, gnis_names_fl){
+  
+  sites %>% inner_join((readRDS(lat_lon_fl)), by = 'site_id') %>% 
+    inner_join((readRDS(gnis_names_fl)), by = 'site_id') %>% 
+    write_csv(fileout)
+  
+}
 bundle_nml_files <- function(json_filename, lake_ids, nml_ind){
   
   

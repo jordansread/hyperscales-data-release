@@ -23,17 +23,16 @@ targets:
   1_spatial:
     depends:
       - out_data/1_spatial.zip
+      - out_data/group_map.png
 
 
   modeled_lake_ids:
     command: extract_model_ids(pb0_job_list = '../lake-temperature-process-models/2_prep/out/glm_pb0_array.rds', 
       results_dir = I('../lake-temperature-process-models/3_run/sync'),
-      dummy = I('2019-10-30'))
+      dummy = I('2019-11-02'))
   
   spatial_groups:
-    command: generate_lat_lon_groups(
-      x0 = I(-99), y0 = I(41), x_num = I(9), y_num = I(5), cell_res = I(2))
-
+    command: generate_group_rects()
   
   modeled_lakes_sf:
     command: subset_lake_sf(
@@ -46,12 +45,20 @@ targets:
   site_ids_grouped:
     command: assign_group_id(modeled_centroids_sf, spatial_groups)
     
+  out_data/lake_metadata.csv:
+    command: create_metadata_file(target_name,
+      sites = site_ids_grouped,
+      lat_lon_fl = '../lake-temperature-model-prep/7_config_merge/out/nml_lat_lon_values.rds',
+      gnis_names_fl = '../lake-temperature-model-prep/2_crosswalk_munge/out/gnisname_nhdhr_xwalk.rds')
     
-# all_lakes_simple <- st_transform(modeled_lakes_sf, crs = "+init=epsg:2811") %>% sf::st_simplify(dTolerance = 40) %>% mutate(area = st_area(Shape) %>% as.numeric) %>%
-#    filter(area < 11196632079) %>% st_transform(crs = "+init=epsg:4326")
   
   spatial_metadata:
     command: extract_feature(modeled_lakes_sf)
+  
+  out_data/group_map.png:
+    command: plot_grouped_preview(target_name, 
+      spatial_groups, modeled_centroids_sf, site_ids_grouped, 
+      lakes_sf_fl = "../lake-temperature-model-prep/1_crosswalk_fetch/out/canonical_lakes_sf.rds")
   
   out_data/1_spatial.zip:
     command: sf_to_zip(target_name, 
