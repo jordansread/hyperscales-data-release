@@ -35,6 +35,21 @@ bundle_nml_files <- function(json_filename, lake_ids, nml_ind){
   RJSONIO::toJSON(out_list, pretty = TRUE) %>% write(json_filename)
 }
 
+zip_nml_files <- function(zipfile, lake_ids, nml_ind){
+  
+  cd <- getwd()
+  on.exit(setwd(cd))
+  zippath <- file.path(getwd(), zipfile)
+  
+  prep_proj_dir <- paste(str_split(nml_ind, '/')[[1]][1:2], collapse = '/')
+  
+  nml_files <- file.path(prep_proj_dir, names(yaml.load_file(nml_ind)))
+  
+  setwd(unique(dirname(nml_files))[1])
+  zip(zippath, files = basename(nml_files))
+  setwd(cd)
+}
+
 zip_meteo_groups <- function(outfile, meteo_fl, site_groups){
   meteo_dir <- '../lake-temperature-model-prep/7_drivers_munge/out'
   meteo_info <- readRDS(meteo_fl) %>% 
