@@ -10,12 +10,21 @@ extract_model_ids <- function(pb0_job_list, results_dir, dummy){
   
 }
 
-
-bundle_nml_files <- function(json_filename, lake_ids, nml_dir){
+create_metadata_file <- function(fileout, sites, lat_lon_fl, gnis_names_fl){
   
+  sites %>% inner_join((readRDS(lat_lon_fl)), by = 'site_id') %>% 
+    inner_join((readRDS(gnis_names_fl)), by = 'site_id') %>% rename(lake_name = GNIS_Name) %>% 
+    write_csv(fileout)
+  
+}
+bundle_nml_files <- function(json_filename, lake_ids, nml_ind){
+  
+  
+  prep_proj_dir <- paste(str_split(nml_ind, '/')[[1]][1:2], collapse = '/')
+  nml_files <- file.path(prep_proj_dir, names(yaml.load_file(nml_ind)))
   out_list <- vector("list", length = length(lake_ids)) %>% setNames(lake_ids)
   for (id in names(out_list)){
-    this_nml_file <- file.path(nml_dir, paste0(id, '.nml'))
+    this_nml_file <- nml_files[basename(nml_files) == paste0(id, '.nml')]
     if (!file.exists(this_nml_file)){
       stop(this_nml_file, " doesn't exist")
     }
