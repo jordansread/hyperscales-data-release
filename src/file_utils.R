@@ -10,9 +10,11 @@ extract_model_ids <- function(pb0_job_list, results_dir, dummy){
   
 }
 
-create_metadata_file <- function(fileout, sites, lat_lon_fl, gnis_names_fl){
+create_metadata_file <- function(fileout, sites, table, lat_lon_fl, gnis_names_fl){
   
   sites %>% inner_join((readRDS(lat_lon_fl)), by = 'site_id') %>% 
+    rename(centroid_lon = longitude, centroid_lat = latitude) %>% 
+    inner_join(table, by = 'site_id') %>% 
     inner_join((readRDS(gnis_names_fl)), by = 'site_id') %>% rename(lake_name = GNIS_Name) %>% 
     write_csv(fileout)
   
