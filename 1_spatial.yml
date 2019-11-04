@@ -68,7 +68,8 @@ targets:
   
   out_data/group_map.png:
     command: plot_grouped_preview(target_name, 
-      spatial_groups, modeled_centroids_sf, site_ids_grouped, 
+      spatial_groups, site_ids_grouped, 
+      county_bounds = us_counties_sf, 
       lakes_sf_fl = "../lake-temperature-model-prep/1_crosswalk_fetch/out/canonical_lakes_sf.rds")
   
   out_data/1_spatial.zip:

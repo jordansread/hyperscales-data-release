@@ -52,7 +52,7 @@ subset_lake_sf <- function(lakes_sf_fl, site_ids){
 }
 
 
-plot_grouped_preview <- function(fileout, spatial_groups, modeled_centroids_sf, site_ids_grouped, lakes_sf_fl){
+plot_grouped_preview <- function(fileout, spatial_groups, county_bounds, site_ids_grouped, lakes_sf_fl){
   png(filename = fileout, width = 8, height = 5.5, units = 'in', res = 500)
   par(omi = c(0,0,0,0), mai = c(0,0,0,0), xaxs = 'i', yaxs = 'i')
   
@@ -68,7 +68,6 @@ plot_grouped_preview <- function(fileout, spatial_groups, modeled_centroids_sf, 
   
   plot(st_geometry(spatial_groups), col = paste0(spatial_groups$col, '4D'), border = 'grey70', lwd = 0.1, reset = FALSE)
 
-
   all_lakes_simple <- readRDS(lakes_sf_fl) %>% st_transform(crs = "+init=epsg:2811") %>% sf::st_simplify(dTolerance = 40) %>% 
     st_transform(crs = "+init=epsg:4326")
   
@@ -76,11 +75,17 @@ plot_grouped_preview <- function(fileout, spatial_groups, modeled_centroids_sf, 
   
   plot(st_geometry(spatial_groups), col = paste0(spatial_groups$col, '4D'), border = 'grey70', lwd = 0.1, add = TRUE)
   
-  modeled_centroids_sf <- inner_join(all_lakes_simple, site_ids_grouped, by = 'site_id') %>% 
+  county_bounds %>% st_geometry() %>% 
+    plot(col = NA, border = 'grey80', lwd = 0.2, add = TRUE)
+  
+  county_bounds %>% group_by(state) %>% summarise() %>% st_geometry() %>% 
+    plot(col = NA, border = 'grey40', lwd = 0.5, add = TRUE)
+  
+  modeled_lakes_sf <- inner_join(all_lakes_simple, site_ids_grouped, by = 'site_id') %>% 
     left_join(g_styles, by = 'group_id')
   
-  plot(st_geometry(modeled_centroids_sf), col = 'dodgerblue', border = 'dodgerblue', lwd = 0.2, add = TRUE)
-  #plot(st_centroid(st_geometry(modeled_centroids_sf)), col = modeled_centroids_sf$col, lwd = 0.2, add = TRUE, cex = 0.25)
+  plot(st_geometry(modeled_lakes_sf), col = 'dodgerblue', border = 'dodgerblue', lwd = 0.2, add = TRUE)
+  #plot(st_centroid(st_geometry(modeled_lakes_sf)), col = modeled_lakes_sf$col, lwd = 0.2, add = TRUE, cex = 0.25)
   
   for (j in 1:nrow(spatial_groups)){
     bbox <- st_bbox(spatial_groups[j,])
