@@ -26,7 +26,7 @@ sf_names_from_overlap <- function(sf_polys1, sf_polys2){
     info <- st_drop_geometry(sf_polys2[match_idx[[i]],])
     cbind(st_drop_geometry(sf_polys1[i,]), 
           lapply(info, function(x) { # lapply across the data.frame columns, squash/combine values when > 1
-            paste(unique(x), collapse = '|')
+            paste(sort(unique(x)), collapse = '|')
             }) %>% data.frame(stringsAsFactors = FALSE))
   }) %>% purrr::reduce(bind_rows)
 }

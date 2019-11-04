@@ -24,9 +24,9 @@ sources:
 targets:
   1_spatial:
     depends:
-      - out_data/1_spatial.zip
-      - out_data/group_map.png
-      - out_data/lake_metadata.csv
+      - out_data/01_spatial.zip
+      - out_data/01_group_ids.png
+      - out_data/01_lake_metadata.csv
 
 
   us_counties_sf:
@@ -55,7 +55,7 @@ targets:
   site_ids_grouped:
     command: assign_group_id(modeled_centroids_sf, spatial_groups)
     
-  out_data/lake_metadata.csv:
+  out_data/01_lake_metadata.csv:
     command: create_metadata_file(target_name,
       sites = site_ids_grouped,
       county_state_overlaps, 
@@ -66,13 +66,13 @@ targets:
   spatial_metadata:
     command: extract_feature(modeled_lakes_sf)
   
-  out_data/group_map.png:
+  out_data/01_group_ids.png:
     command: plot_grouped_preview(target_name, 
       spatial_groups, site_ids_grouped, 
       county_bounds = us_counties_sf, 
       lakes_sf_fl = "../lake-temperature-model-prep/1_crosswalk_fetch/out/canonical_lakes_sf.rds")
   
-  out_data/1_spatial.zip:
+  out_data/01_spatial.zip:
     command: sf_to_zip(target_name, 
       sf_object = modeled_lakes_sf, 
       layer_name = I('study_lakes'))
