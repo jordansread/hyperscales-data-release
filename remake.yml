@@ -97,7 +97,7 @@ targets:
       
   04_inputs_sb_data:
     command: sb_replace_files(sbid_04_inputs,
-      'out_data/01_group_ids.png') #file_hash = "out/4_inputs_zips.yml")
+      'out_data/04_group_meteo.png') #file_hash = "out/4_inputs_zips.yml")
   
   04_inputs_sb_ice:
     command: sb_replace_files(sbid_04_inputs,
@@ -110,7 +110,7 @@ targets:
   
   05_predictions_sb_data:
     command: sb_replace_files(sbid_05_predictions,
-      'out_data/01_group_ids.png') #file_hash = "out/5_predictions_zips.yml")
+      'out_data/05_group_lakes.png') #file_hash = "out/5_predictions_zips.yml")
 
   06_habitat_sb_xml:
     command: sb_render_post_xml(sbid_06_habitat,

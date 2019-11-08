@@ -98,7 +98,7 @@ entities:
       data-units: NA
 
 data-name: Polygons for study lakes
-data-description: Shapefile of study lakes included in this data release.
+data-description: Shapefile of study lakes included in this data release; metadata file for lakes in this data release
 
 file-format: Shapefile Data Set
 
