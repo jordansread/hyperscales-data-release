@@ -4,15 +4,19 @@ extract_model_ids <- function(pb0_job_list, results_dir, dummy){
   files_here <- dir(results_dir)
   job_list <- readRDS(pb0_job_list)
   # these are export files...
-  job_files <- sapply(1:length(job_list), function(x) c(basename(job_list[[x]]$export_file))) %>% c()
+  job_files <- unlist(sapply(1:length(job_list), function(x) c(basename(job_list[[x]]$export_file))) %>% c())
   
   model_ids <- files_here[files_here %in% job_files] %>% stringr::str_remove('pb0_') %>% stringr::str_remove("_temperatures.feather")
   
 }
 
-create_metadata_file <- function(fileout, sites, table, lat_lon_fl, meteo_fl, gnis_names_fl){
-  
+create_metadata_file <- function(fileout, sites, table, lakes_sf, lat_lon_fl, meteo_fl, gnis_names_fl){
+  sdf <- sf::st_transform(lakes_sf, 2811) %>% 
+    mutate(perim = lwgeom::st_perimeter_2d(Shape), area = sf::st_area(Shape), circle_perim = 2*pi*sqrt(area/pi), SDF = perim/circle_perim) %>% 
+    sf::st_drop_geometry() %>% select(site_id, SDF) 
+
   sites %>% inner_join((readRDS(lat_lon_fl)), by = 'site_id') %>% 
+    inner_join(sdf, by = 'site_id') %>% 
     rename(centroid_lon = longitude, centroid_lat = latitude) %>% 
     inner_join(table, by = 'site_id') %>% 
     inner_join(readRDS(meteo_fl), by = 'site_id') %>% 
@@ -53,25 +57,44 @@ zip_nml_files <- function(zipfile, lake_ids, nml_ind){
   setwd(cd)
 }
 
-zip_meteo_groups <- function(outfile, meteo_fl, site_groups){
-  meteo_dir <- '../lake-temperature-model-prep/7_drivers_munge/out'
-  meteo_info <- readRDS(meteo_fl) %>% 
-    inner_join(site_groups, by = 'site_id') %>% select(-site_id) %>% 
-    distinct()
+group_meteo_fls <- function(meteo_dir, groups){
   
+  # turn files into point locations
+  # check group match with assign_group_id(points, polygons)
+  # return data.frame with id and filename
+  
+  meteo_fls <- data.frame(files = dir(meteo_dir), stringsAsFactors = FALSE) %>% 
+    filter(stringr::str_detect(files, "[0-9n]\\].csv")) %>% 
+    mutate(x = stringr::str_extract(files, 'x\\[[0-9]+\\]') %>% str_remove('x\\[') %>% str_remove('\\]') %>% as.numeric(),
+           y = stringr::str_extract(files, 'y\\[[0-9]+\\]') %>% str_remove('y\\[') %>% str_remove('\\]') %>% as.numeric()) %>% 
+    left_join(suppressWarnings(st_centroid(create_ldas_grid()))) %>% rename(geometry = ldas_grid_sfc) %>% select(-x, -y) %>% 
+    st_sf()
+  
+  grouped_df <- st_intersects(x = meteo_fls, y = groups) %>% as.data.frame() %>% rename(group_idx = col.id)
+  
+  meteo_fls %>% mutate(row.id = row_number()) %>% 
+    inner_join(grouped_df) %>% mutate(group_id = groups$group_id[group_idx], meteo_filepath = file.path(meteo_dir, files)) %>% 
+    select(meteo_filepath, group_id) %>% st_drop_geometry()
+  
+}
+
+zip_meteo_groups <- function(outfile, grouped_meteo_fls){
+
   cd <- getwd()
   on.exit(setwd(cd))
   
-  groups <- unique(meteo_info$group_id)
+  groups <- unique(grouped_meteo_fls$group_id)
   data_files <- c()
   for (group in groups){
     zipfile <- paste0('tmp/inputs_', group, '.zip')
-    these_files <- meteo_info %>% filter(group_id == !!group) %>% pull(meteo_fl)
+    these_files <- grouped_meteo_fls %>% filter(group_id == !!group) %>% pull(meteo_filepath)
     
     zippath <- file.path(getwd(), zipfile)
     
+    meteo_dir <- dirname(these_files) %>% unique()
+    
     setwd(meteo_dir)
-    zip(zippath, files = these_files)
+    zip(zippath, files = basename(these_files))
     setwd(cd)
     data_files <- c(data_files, zipfile)
   }
@@ -148,7 +171,7 @@ zip_ice_flags_groups <- function(outfile, model_dir, model_ids, site_groups){
 }
 
 zip_temp_obs <- function(outfile, temp_feather){
-  warning('***this is a temporary function and should be replaced with output from the other pipeline***')
+
   cd <- getwd()
   on.exit(setwd(cd))
   
@@ -156,7 +179,7 @@ zip_temp_obs <- function(outfile, temp_feather){
   csv_file <- paste0(tools::file_path_sans_ext(basename(outfile)) ,'.csv')
   csv_path <- file.path(tempdir(), csv_file)
   
-  feather::read_feather(temp_feather) %>% rename(site_id = nhdhr_id) %>% 
+  feather::read_feather(temp_feather) %>% 
     write_csv(path = csv_path)
   
   setwd(dirname(csv_path))

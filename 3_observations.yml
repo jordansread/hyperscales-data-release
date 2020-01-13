@@ -24,6 +24,7 @@ targets:
       - out_data/03_temperature_observations.zip
 
   out_data/03_temperature_observations.zip:
-    command: zip_temp_obs(target_name, '~/Downloads/SAM_merged_temp_data_daily.feather')
+    command: zip_temp_obs(target_name, 
+      '../lake-temperature-model-prep/7b_temp_merge/out/merged_temp_data_daily.feather')
 
 

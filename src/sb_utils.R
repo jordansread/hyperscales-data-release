@@ -7,7 +7,7 @@ sb_replace_files <- function(sb_id, ..., file_hash){
   
   hashed_filenames <- c()
   if (!missing(file_hash)){
-    hashed_filenames <- yaml.load_file(file_hash) %>% names
+    hashed_filenames <- yaml.load_file(file_hash) %>% names %>% sort() %>% rev()
     for (file in hashed_filenames){
       item_replace_files(sb_id, files = file)
     }

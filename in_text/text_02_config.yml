@@ -4,26 +4,28 @@ title: >-
 abstract: >-
   This dataset provides model specifications used to estimate water temperature from a process-based model (Hipsey et al. 2019).
   The format is a single JSON file indexed for each lake based on the "site_id".
-  This dataset is part of a larger data release of lake temperature model inputs and outputs for 68 lakes in the U.S.
-  states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9AQPIVD).
+  This dataset is part of a larger data release of lake temperature model inputs and outputs for 6,695 lakes in the U.S.
+  states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9CA6XP8).
 cross-cites:
   -
     authors: ['Matthew R. Hipsey', 'Louise C. Bruce', 'Casper Boon', 'Brendan Busch', 'Cayelan C. Carey', 'David P. Hamilton', 'Paul C. Hanson', 'Jordan S. Read', 'Eduardo de Sousa', 'Michael Weber', 'Luke A. Winslow']
     title: >-
       A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON).
     pubdate: 2019
+    form: publication
     link: https://doi.org/10.5194/gmd-12-473-2019
   -
     authors: ['Luke A. Winslow','Gretchen J.A. Hansen','Jordan S. Read']
     title: >-
       Data release: A large-scale database of modeled contemporary and future water temperature data for 10,774 Michigan, Minnesota and Wisconsin Lakes
     pubdate: 2016
+    form: data release
     link: http://dx.doi.org/10.5066/F7DV1H10
 
 entities:
   -
-    data-name: glm_config.json
-    data-description: A JSON file containing parameters for each of 68 lakes in this study
+    data-name: pb0_config.json
+    data-description: A JSON file containing parameters for each of the lakes in this study
     attributes:
     -
       attr-label: glm_setup
@@ -95,7 +97,80 @@ entities:
       data-min: NA
       data-max: NA
       data-units: NA
-
+  -
+    data-name: pb0_nml_files.zip
+    data-description: A zip file containing many glm2.nml files, one for each lake in this study
+    attributes:
+    -
+      attr-label: glm_setup
+      attr-def: parameters for setting up the General Lake Model and defining constants
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: morphometry
+      attr-def: parameters describing the depth/area relationship of the lake for the General Lake Model
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: time
+      attr-def: parameters describing the time period and frequency of model runs for the General Lake Model
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: output
+      attr-def: parameters describing how the outputs of model runs from the General Lake Model are written
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: init_profiles
+      attr-def: parameters describing General Lake Model initial conditions
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: meteorology
+      attr-def: parameters describing time series drivers of General Lake Model runs
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: bird_model
+      attr-def: parameters describing the use (if applicable) of the Bird model for General Lake Model runs
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: inflow
+      attr-def: parameters describing inflows to the General Lake Model
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: outflow
+      attr-def: parameters describing outflows from the General Lake Model
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: snowice
+      attr-def: parameters describing how snow and ice dynamics are calculated by the General Lake Model
+      attr-defs: Hipsey et al. 2019
+      data-min: NA
+      data-max: NA
+      data-units: NA
 build-environment: >-
   This dataset was generated using open source tools available in the R programming language (R version 3.6.1 (2019-07-05)).
   The computing platform for generating data and metadata was x86_64-apple-darwin15.6.0.
