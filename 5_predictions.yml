@@ -26,12 +26,14 @@ targets:
       - out/5_predictions_zips.yml
       - out_data/05_group_lakes.png
   
+  predictions_df:
+    command: build_predict_df(site_id_list = model_export_ids, 
+      model_dir = I('../lake-temperature-process-models/3_run/sync'), dummy = I('2020-01-28'))
+      
+      
   out/5_predictions_zips.yml:
-    command: zip_prediction_groups(target_name, 
-      model_dir = I('../lake-temperature-process-models/3_run/sync'),
-      modeled_lake_ids,
+    command: zip_prediction_groups(target_name, predictions_df,
       site_groups = site_ids_grouped)
-
   
   out_data/05_group_lakes.png:
     command: plot_grouped_lakes_preview(target_name, 

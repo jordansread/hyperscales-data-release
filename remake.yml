@@ -79,7 +79,9 @@ targets:
   02_config_sb_data:
     command: sb_replace_files(sbid_02_config,
       "out_data/pb0_config.json",
-      "out_data/pb0_nml_files.zip")
+      "out_data/pb0_nml_files.zip",
+      "out_data/pball_config.json",
+      "out_data/pball_nml_files.zip")
       
   03_observations_sb_xml:
     command: sb_render_post_xml(sbid_03_observations,

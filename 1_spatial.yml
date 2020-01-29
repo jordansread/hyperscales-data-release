@@ -34,9 +34,14 @@ targets:
       layer_name = I('cb_2018_us_county_5m'))
     
   modeled_lake_ids:
-    command: extract_model_ids(pb0_job_list = '../lake-temperature-process-models/2_prep/out/glm_pb0_array.rds', 
+    command: extract_model_ids(job_list_rds = '../lake-temperature-process-models/2_prep/out/glm_pb0_array.rds', 
       results_dir = I('../lake-temperature-process-models/3_run/sync'),
-      dummy = I('2019-11-02'))
+      dummy = I('2020-01-25'))
+      
+  calibrated_lake_ids:
+    command: extract_model_ids(job_list_rds = '../lake-temperature-process-models/2_prep/out/glm_pball_export.rds', 
+      results_dir = I('../lake-temperature-process-models/3_run/sync'),
+      dummy = I('2020-01-25'))
   
   spatial_groups:
     command: generate_group_rects()
