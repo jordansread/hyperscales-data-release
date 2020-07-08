@@ -11,6 +11,13 @@ extract_model_ids <- function(job_list_rds, results_dir, dummy){
   
 }
 
+extract_model_from_table <- function(job_table_ind){
+  tibble(files = names(yaml::yaml.load_file(job_table_ind))) %>% 
+    extract(files, c('type','site_id'), "(pb0|transfer|pball)_(.*)_temperatures.feather") %>% pull(site_id)
+  
+}
+
+
 create_metadata_file <- function(fileout, sites, table, lakes_sf, lat_lon_fl, meteo_fl, gnis_names_fl){
   sdf <- sf::st_transform(lakes_sf, 2811) %>% 
     mutate(perim = lwgeom::st_perimeter_2d(Shape), area = sf::st_area(Shape), circle_perim = 2*pi*sqrt(area/pi), SDF = perim/circle_perim) %>% 
@@ -136,6 +143,10 @@ zip_prediction_groups <- function(outfile, predictions_df, site_groups){
     these_files <- model_feathers %>% filter(group_id == !!group)
     
     zippath <- file.path(getwd(), zipfile)
+    
+    if (file.exists(zippath)){
+      unlink(zippath) #seems it was adding to the zip as opposed to wiping and starting fresh...
+    }
     
     for (i in 1:nrow(these_files)){
       fileout <- file.path(tempdir(), these_files$out_file[i])
