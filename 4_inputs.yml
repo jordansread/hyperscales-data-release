@@ -28,6 +28,17 @@ targets:
       - out/4_ice_flags_zips.yml
       - out_data/04_group_meteo.png
   
+  
+  # out_file: predict_nhdhr_109865_pgdl.csv
+  # source_file: 
+  
+  model_export_ids:
+    command: list(pb0 = modeled_lake_ids, pball = calibrated_lake_ids)
+    
+  ice_flags_df:
+    command: build_predict_df(site_id_list = model_export_ids, 
+      model_dir = I('../lake-temperature-process-models/3_run/sync'), dummy = I('2020-01-28'))
+    
   grouped_meteo_fls:
     command: group_meteo_fls(
       meteo_dir = I('../lake-temperature-model-prep/7_drivers_munge/out'),
@@ -38,10 +49,10 @@ targets:
     command: zip_meteo_groups(target_name, 
       grouped_meteo_fls = grouped_meteo_fls)
   
+  # need to use the same logic for ice as we did for temperature predictions:
   out/4_ice_flags_zips.yml:
     command: zip_ice_flags_groups(target_name, 
-      model_dir = I('../lake-temperature-process-models/3_run/sync'),
-      modeled_lake_ids,
+      file_info_df = ice_flags_df,
       site_groups = site_ids_grouped)
     depends: out/5_predictions_zips.yml
       
