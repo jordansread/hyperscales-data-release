@@ -229,12 +229,3 @@ zip_temp_obs <- function(outfile, temp_feather){
   setwd(cd)
   
 }
-
-#' function borrowed from mntoha-data-release that migrates the file hash yaml from
-#' the repo location where the files were built into this data release repo
-update_hash_path <- function(yaml_out, yaml_in, add_path){
-  hash_yaml <- yaml::yaml.load_file(yaml_in)
-  old_paths <- names(hash_yaml)
-  names(hash_yaml) <- file.path(add_path, old_paths)
-  yaml::write_yaml(hash_yaml, file = yaml_out)
-}
