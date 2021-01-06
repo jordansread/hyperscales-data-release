@@ -11,6 +11,7 @@ packages:
   - dataRetrieval
   - rgdal
   - httr
+  - lwgeom
   - stringr
   - glmtools
   - sf
@@ -25,8 +26,6 @@ targets:
   1_spatial:
     depends:
       - out_data/01_spatial.zip
-      - out_data/01_group_meteo.png
-      - out_data/01_group_lakes.png
       - out_data/01_lake_metadata.csv
 
 
@@ -35,9 +34,12 @@ targets:
       layer_name = I('cb_2018_us_county_5m'))
     
   modeled_lake_ids:
-    command: extract_model_ids(pb0_job_list = '../lake-temperature-process-models/2_prep/out/glm_pb0_array.rds', 
+    command: extract_model_from_table(job_table_ind = '../lake-temperature-process-models/3_run/out/pb0_src_trg_tasks.rds.ind')
+      
+  calibrated_lake_ids:
+    command: extract_model_ids(job_list_rds = '../lake-temperature-process-models/2_prep/out/glm_pball_export.rds', 
       results_dir = I('../lake-temperature-process-models/3_run/sync'),
-      dummy = I('2019-11-02'))
+      dummy = I('2020-01-25'))
   
   spatial_groups:
     command: generate_group_rects()
@@ -60,6 +62,7 @@ targets:
     command: create_metadata_file(target_name,
       sites = site_ids_grouped,
       county_state_overlaps, 
+      lakes_sf = modeled_lakes_sf, 
       lat_lon_fl = '../lake-temperature-model-prep/7_config_merge/out/nml_lat_lon_values.rds',
       meteo_fl = '../lake-temperature-model-prep/7_config_merge/out/nml_meteo_fl_values.rds',
       gnis_names_fl = '../lake-temperature-model-prep/2_crosswalk_munge/out/gnisname_nhdhr_xwalk.rds')

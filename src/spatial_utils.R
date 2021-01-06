@@ -21,7 +21,6 @@ sf_names_from_overlap <- function(sf_polys1, sf_polys2){
     st_intersects(sf_polys2) 
   
   stopifnot(sum(sapply(match_idx, is.null)) == 0) # check that all poly1 have matches
-  
   purrr::map(1:nrow(sf_polys1),function(i){
     info <- st_drop_geometry(sf_polys2[match_idx[[i]],])
     cbind(st_drop_geometry(sf_polys1[i,]), 
@@ -116,10 +115,11 @@ create_ldas_grid <- function(x0 = -124.9375, y0 = 25.0625, x_num = 464, y_num = 
 }
 
 
-plot_grouped_cells_preview <- function(fileout, spatial_groups, county_bounds, site_ids_grouped, lakes_sf_fl, meteo_fl){
+plot_grouped_cells_preview <- function(fileout, spatial_groups, county_bounds, site_ids_grouped, lakes_sf_fl, grouped_meteo_fls){
   
-  meteos <- readRDS(meteo_fl) %>% filter(site_id %in% site_ids_grouped$site_id) %>% pull(meteo_fl) %>% unique()
-  ldas_grid <- create_ldas_grid() %>% mutate(meteo_fl = sprintf('NLDAS_time[0.351500]_x[%s]_y[%s].csv', x, y)) %>% 
+
+  meteos <- basename(grouped_meteo_fls$meteo_filepath)
+  ldas_grid <- create_ldas_grid() %>% mutate(meteo_fl = sprintf('NLDAS_time[0.359420]_x[%s]_y[%s].csv', x, y)) %>% 
     filter(meteo_fl %in% meteos)
   
   

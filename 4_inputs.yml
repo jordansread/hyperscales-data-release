@@ -19,6 +19,7 @@ packages:
 
 sources:
   - src/file_utils.R
+  - src/spatial_utils.R
 
 targets:
   4_inputs:
@@ -27,20 +28,39 @@ targets:
       - out/4_ice_flags_zips.yml
       - out_data/04_group_meteo.png
   
+  
+  # out_file: predict_nhdhr_109865_pgdl.csv
+  # source_file: 
+  
+  model_export_ids:
+    command: list(pb0 = modeled_lake_ids, pball = calibrated_lake_ids)
+    
+  ice_flags_df:
+    command: build_predict_df(site_id_list = model_export_ids, 
+      model_dir = I('../lake-temperature-process-models/3_run/sync'), dummy = I('2020-01-28'))
+    
+  grouped_meteo_fls:
+    command: group_meteo_fls(
+      meteo_dir = I('../lake-temperature-model-prep/7_drivers_munge/out'),
+      groups = spatial_groups)
+      
+      
   out/4_inputs_zips.yml:
     command: zip_meteo_groups(target_name, 
-      meteo_fl = "../lake-temperature-model-prep/7_config_merge/out/nml_meteo_fl_values.rds",
-      site_groups = site_ids_grouped)
+      grouped_meteo_fls = grouped_meteo_fls)
   
+  # need to use the same logic for ice as we did for temperature predictions:
   out/4_ice_flags_zips.yml:
     command: zip_ice_flags_groups(target_name, 
-      model_dir = I('../lake-temperature-process-models/3_run/sync'),
-      modeled_lake_ids,
+      file_info_df = ice_flags_df,
       site_groups = site_ids_grouped)
+    depends: out/5_predictions_zips.yml
       
+      
+  #update this!!
   out_data/04_group_meteo.png:
     command: plot_grouped_cells_preview(target_name, 
       spatial_groups, site_ids_grouped, 
       county_bounds = us_counties_sf, 
       lakes_sf_fl = "../lake-temperature-model-prep/1_crosswalk_fetch/out/canonical_lakes_sf.rds",
-      meteo_fl = '../lake-temperature-model-prep/7_config_merge/out/nml_meteo_fl_values.rds')
+      grouped_meteo_fls = grouped_meteo_fls)

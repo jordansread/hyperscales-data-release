@@ -41,7 +41,7 @@ targets:
       - 03_observations_sb_data
       - 04_inputs_sb_xml
       - 04_inputs_sb_data
-      #- 04_inputs_sb_ice
+      - 04_inputs_sb_ice
       - 05_predictions_sb_xml
       - 05_predictions_sb_data # upload these manually w/ the large file uploader
       - 06_habitat_sb_xml
@@ -79,7 +79,9 @@ targets:
   02_config_sb_data:
     command: sb_replace_files(sbid_02_config,
       "out_data/pb0_config.json",
-      "out_data/pb0_nml_files.zip")
+      "out_data/pb0_nml_files.zip",
+      "out_data/pball_config.json",
+      "out_data/pball_nml_files.zip")
       
   03_observations_sb_xml:
     command: sb_render_post_xml(sbid_03_observations,
@@ -97,7 +99,7 @@ targets:
       
   04_inputs_sb_data:
     command: sb_replace_files(sbid_04_inputs,
-      'out_data/04_group_meteo.png') #file_hash = "out/4_inputs_zips.yml")
+      'out_data/04_group_meteo.png', file_hash = "out/4_inputs_zips.yml")
   
   04_inputs_sb_ice:
     command: sb_replace_files(sbid_04_inputs,
@@ -110,7 +112,7 @@ targets:
   
   05_predictions_sb_data:
     command: sb_replace_files(sbid_05_predictions,
-      'out_data/05_group_lakes.png') #file_hash = "out/5_predictions_zips.yml")
+      'out_data/05_group_lakes.png', file_hash = "out/5_predictions_zips.yml")
 
   06_habitat_sb_xml:
     command: sb_render_post_xml(sbid_06_habitat,
