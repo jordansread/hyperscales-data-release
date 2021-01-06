@@ -40,7 +40,7 @@ targets:
       - 03_observations_sb_xml
       - 03_observations_sb_data
       - 04_inputs_sb_xml
-      - 04_inputs_sb_data
+      #- 04_inputs_sb_data
       - 04_inputs_sb_ice
       - 05_predictions_sb_xml
       - 05_predictions_sb_data # upload these manually w/ the large file uploader

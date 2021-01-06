@@ -33,9 +33,15 @@ targets:
     command: fetch_zip_url_sf(I('https://www2.census.gov/geo/tiger/GENZ2018/shp/cb_2018_us_county_5m.zip'), 
       layer_name = I('cb_2018_us_county_5m'))
     
-  modeled_lake_ids:
+  mtl_lake_ids:
     command: extract_model_from_table(job_table_ind = '../lake-temperature-process-models/3_run/out/pb0_src_trg_tasks.rds.ind')
-      
+
+  hyperscales_lake_ids:
+    command: extract_model_from_table(job_table_ind = '../lake-temperature-process-models/3_run/out/pb0_hyperscales_tasks.ind')
+  
+  modeled_lake_ids:
+    command: extract_from_rds('../lake-temperature-model-prep/7_config_merge/out/nml_lake_depth_values.rds')#c(mtl_lake_ids, hyperscales_lake_ids)
+    
   calibrated_lake_ids:
     command: extract_model_ids(job_list_rds = '../lake-temperature-process-models/2_prep/out/glm_pball_export.rds', 
       results_dir = I('../lake-temperature-process-models/3_run/sync'),

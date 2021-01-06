@@ -23,8 +23,8 @@ generate_group_rects <- function(){
     (unit_cell * scale)+shift
   }
   group_rects <- st_sfc(crs = "+init=epsg:4326",
-    shift_scale(c(-100,49), c(5,2)),
-    shift_scale(c(-95,49), c(3.5,1)),
+    shift_scale(c(-104.25,49), c(9.25,2)),
+    shift_scale(c(-95,49.5), c(3.5,1.5)),
     shift_scale(c(-91.5,49), c(2.5,1)),
     shift_scale(c(-95,48)),
     shift_scale(c(-94,48), c(1, 0.5)),
@@ -34,7 +34,7 @@ generate_group_rects <- function(){
     shift_scale(c(-91,48), c(1, 2)),
     shift_scale(c(-90,48), c(1,2)),
     shift_scale(c(-89,47.5), c(5.5, 1.5)),
-    shift_scale(c(-100,47), c(4, 3)),
+    shift_scale(c(-104,47), c(8, 3)), #12
     shift_scale(c(-96,47), c(1.5,0.5)),
     shift_scale(c(-96,46.5), c(1.5,0.5)),
     shift_scale(c(-94.5,47), c(0.5,1)),
@@ -43,8 +43,8 @@ generate_group_rects <- function(){
     shift_scale(c(-92,46)),
     shift_scale(c(-91,46), c(1.5,0.5)),
     shift_scale(c(-96,45), c(2.5,1)),
-    shift_scale(c(-100,44), c(9,3.5)),
-    shift_scale(c(-91,45.5), c(1.5,5)),
+    shift_scale(c(-100,44), c(9,3.75)), #21
+    shift_scale(c(-91,45.5), c(1.5,7.5)),
     shift_scale(c(-89.5,46), c(0.5,1)),
     shift_scale(c(-89,46)),
     shift_scale(c(-88,46), c(3,3)),
@@ -52,7 +52,7 @@ generate_group_rects <- function(){
     shift_scale(c(-89.5,45), c(1.5,2)),
     shift_scale(c(-89.5,43), c(4,1.5)),
     shift_scale(c(-85.5,43), c(3,1.5)),
-    shift_scale(c(-89.5,41.5), c(5,1)),
+    shift_scale(c(-89.5,41.5), c(5,4.5)), #30
     shift_scale(c(-96,46), c(1.5,1)),
     shift_scale(c(-94.5,46)),
     shift_scale(c(-93.5,46)),
@@ -71,6 +71,9 @@ generate_group_rects <- function(){
 }
 
 assign_group_id <- function(points, polygons){
+  # to test visually
+  # plot(polygons, reset = F)
+  # plot(st_geometry(points), add = TRUE)
   points %>% mutate(group_id = {st_intersects(x = points, y = polygons) %>% unlist %>% polygons$group_id[.]}) %>% 
     st_drop_geometry()
 }
