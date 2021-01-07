@@ -21,6 +21,8 @@ packages:
   - RcppCNPy
   - purrr
   - dssecrets
+  - scipiper
+  - remake
 
 sources:
   - src/spatial_utils.R
