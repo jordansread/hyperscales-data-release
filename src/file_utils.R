@@ -80,7 +80,7 @@ group_meteo_fls <- function(meteo_dir, groups){
   # turn files into point locations
   # check group match with assign_group_id(points, polygons)
   # return data.frame with id and filename
-  stop('need to modify this to work with the local_drivers.ind file')
+  message('need to modify this to work with the local_drivers.ind file')
   meteo_fls <- tibble(files = dir(meteo_dir)) %>% 
     filter(stringr::str_detect(files, "[0-9n]\\].csv")) %>% 
     mutate(x = stringr::str_extract(files, 'x\\[[0-9]+\\]') %>% str_remove('x\\[') %>% str_remove('\\]') %>% as.numeric(),
@@ -162,9 +162,13 @@ zip_prediction_groups <- function(outfile, predictions_df, site_groups){
     for (i in 1:nrow(these_files)){
       fileout <- file.path(tempdir(), these_files$out_file[i])
       feather::read_feather(these_files$source_filepath[i]) %>%
-        select(-ice, date = DateTime) %>%
-        mutate(date = as.Date(lubridate::ceiling_date(date, 'days'))) %>%
-        write_csv(path = fileout)
+        dplyr::select(-ice) %>%
+        # was oddly getting Error in (function (dt, year, month, yday, mday, wday, hour, minute, second,  : 
+        #CCTZ: Invalid timezone of the input vector: "Etc/GMT+7" for at least one file
+        dplyr::mutate(date = as.character(DateTime)) %>% 
+        select(-DateTime, date, everything()) %>% 
+        readr::write_csv(path = fileout)
+      
       fileout
     }
     
@@ -209,8 +213,10 @@ zip_ice_flags_groups <- function(outfile, file_info_df, site_groups){
     for (i in 1:nrow(these_files)){
       fileout <- file.path(tempdir(), these_files$out_file[i])
       feather::read_feather(these_files$source_filepath[i]) %>%
-        select(date = DateTime, ice) %>% # <- note this line also differs from the temperature export
-        mutate(date = as.Date(lubridate::ceiling_date(date, 'days'))) %>%
+        dplyr::select(date = DateTime, ice) %>% # <- note this line also differs from the temperature export
+        # was oddly getting Error in (function (dt, year, month, yday, mday, wday, hour, minute, second,  : 
+        #CCTZ: Invalid timezone of the input vector: "Etc/GMT+7" for at least one file
+        dplyr::mutate(date = as.character(date)) %>% 
         write_csv(path = fileout)
       fileout
     }
