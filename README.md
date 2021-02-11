@@ -22,5 +22,5 @@ module load legacy R/3.6.3 tools/nco-4.7.8-gnu tools/netcdf-c-4.3.2-intel gdal/3
 R
 library(scipiper)
 sbtools::authenticate_sb('cidamanager')
-scmake('log/06_habitat_sb.csv')
+scmake('log/06_habitat_sb_data.csv')
 ```

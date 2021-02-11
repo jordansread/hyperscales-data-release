@@ -2,6 +2,7 @@
 include:
   - 3_observations.yml
   - 5_predictions.yml
+  - 6_habitat.yml
 
 packages:
   - yaml
