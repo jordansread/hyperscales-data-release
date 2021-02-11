@@ -11,6 +11,10 @@ extract_model_ids <- function(job_list_rds, results_dir, dummy){
   
 }
 
+extract_from_rds <- function(file){
+  readRDS(file)$site_id
+}
+
 extract_model_from_table <- function(job_table_ind){
   tibble(files = names(yaml::yaml.load_file(job_table_ind))) %>% 
     extract(files, c('type','site_id'), "(pb0|transfer|pball)_(.*)_temperatures.feather") %>% pull(site_id)
@@ -64,6 +68,9 @@ zip_nml_files <- function(zipfile, lake_ids, nml_ind){
   nml_files <- file.path(prep_proj_dir, names(yaml.load_file(nml_ind)))
   
   setwd(unique(dirname(nml_files))[1])
+  if (file.exists(zippath)){
+    unlink(zippath) #seems it was adding to the zip as opposed to wiping and starting fresh...
+  }
   zip(zippath, files = basename(nml_files))
   setwd(cd)
 }
@@ -73,8 +80,8 @@ group_meteo_fls <- function(meteo_dir, groups){
   # turn files into point locations
   # check group match with assign_group_id(points, polygons)
   # return data.frame with id and filename
-  
-  meteo_fls <- data.frame(files = dir(meteo_dir), stringsAsFactors = FALSE) %>% 
+  message('need to modify this to work with the local_drivers.ind file')
+  meteo_fls <- tibble(files = dir(meteo_dir)) %>% 
     filter(stringr::str_detect(files, "[0-9n]\\].csv")) %>% 
     mutate(x = stringr::str_extract(files, 'x\\[[0-9]+\\]') %>% str_remove('x\\[') %>% str_remove('\\]') %>% as.numeric(),
            y = stringr::str_extract(files, 'y\\[[0-9]+\\]') %>% str_remove('y\\[') %>% str_remove('\\]') %>% as.numeric()) %>% 
@@ -101,6 +108,10 @@ zip_meteo_groups <- function(outfile, grouped_meteo_fls){
     these_files <- grouped_meteo_fls %>% filter(group_id == !!group) %>% pull(meteo_filepath)
     
     zippath <- file.path(getwd(), zipfile)
+    
+    if (file.exists(zippath)){
+      unlink(zippath) #seems it was adding to the zip as opposed to wiping and starting fresh...
+    }
     
     meteo_dir <- dirname(these_files) %>% unique()
     
@@ -151,9 +162,13 @@ zip_prediction_groups <- function(outfile, predictions_df, site_groups){
     for (i in 1:nrow(these_files)){
       fileout <- file.path(tempdir(), these_files$out_file[i])
       feather::read_feather(these_files$source_filepath[i]) %>%
-        select(-ice, date = DateTime) %>%
-        mutate(date = as.Date(lubridate::ceiling_date(date, 'days'))) %>%
-        write_csv(path = fileout)
+        dplyr::select(-ice) %>%
+        # was oddly getting Error in (function (dt, year, month, yday, mday, wday, hour, minute, second,  : 
+        #CCTZ: Invalid timezone of the input vector: "Etc/GMT+7" for at least one file
+        dplyr::mutate(date = as.character(DateTime)) %>% 
+        select(-DateTime, date, everything()) %>% 
+        readr::write_csv(path = fileout)
+      
       fileout
     }
     
@@ -192,12 +207,16 @@ zip_ice_flags_groups <- function(outfile, file_info_df, site_groups){
     these_files <- model_feathers %>% filter(group_id == !!group)
     
     zippath <- file.path(getwd(), zipfile)
-    
+    if (file.exists(zippath)){
+      unlink(zippath) #seems it was adding to the zip as opposed to wiping and starting fresh...
+    }
     for (i in 1:nrow(these_files)){
       fileout <- file.path(tempdir(), these_files$out_file[i])
       feather::read_feather(these_files$source_filepath[i]) %>%
-        select(date = DateTime, ice) %>% # <- note this line also differs from the temperature export
-        mutate(date = as.Date(lubridate::ceiling_date(date, 'days'))) %>%
+        dplyr::select(date = DateTime, ice) %>% # <- note this line also differs from the temperature export
+        # was oddly getting Error in (function (dt, year, month, yday, mday, wday, hour, minute, second,  : 
+        #CCTZ: Invalid timezone of the input vector: "Etc/GMT+7" for at least one file
+        dplyr::mutate(date = as.character(date)) %>% 
         write_csv(path = fileout)
       fileout
     }

@@ -5,6 +5,7 @@ include:
 
 packages:
   - yaml
+  - scipiper
   - whisker
   - dplyr
   - tidyr
@@ -50,6 +51,7 @@ targets:
       - log/04_inputs_sb_data.csv
       - log/04_inputs_sb_ice.csv
       - log/05_predictions_sb_data.csv # upload these manually w/ the large file uploader
+
 
 
 # in case you want to mess w/ the xml alone:

@@ -63,13 +63,13 @@ plot_groups <- function(fileout, spatial_groups, county_bounds, lakes_sf_fl){
   
   spatial_groups <- left_join(spatial_groups, g_styles, by = 'group_id')
   
-  plot(st_geometry(spatial_groups), col = paste0(spatial_groups$col, '4D'), border = 'grey70', lwd = 0.1, reset = FALSE)
+  plot(st_geometry(spatial_groups), col = NA, border = NA, lwd = 0.1, reset = FALSE)
   all_lakes_simple <- readRDS(lakes_sf_fl) %>% st_transform(crs = "+init=epsg:2811") %>% sf::st_simplify(dTolerance = 40) %>% 
     st_transform(crs = "+init=epsg:4326")
   
   plot(st_geometry(all_lakes_simple), col = 'grey70', border = 'grey70', lwd = 0.1, add = TRUE)
   
-  plot(st_geometry(spatial_groups), col = paste0(spatial_groups$col, '4D'), border = 'grey70', lwd = 0.1, add = TRUE)
+  #plot(st_geometry(spatial_groups), col = paste0(spatial_groups$col, '4D'), border = 'grey70', lwd = 0.1, add = TRUE)
   
   county_bounds %>% st_geometry() %>% 
     plot(col = NA, border = 'grey80', lwd = 0.2, add = TRUE)
@@ -78,6 +78,32 @@ plot_groups <- function(fileout, spatial_groups, county_bounds, lakes_sf_fl){
     plot(col = NA, border = 'grey40', lwd = 0.5, add = TRUE)
   
   invisible(list(sf = all_lakes_simple, style = g_styles))
+}
+
+plot_nccasc_lakes <- function(fileout, model_ids, county_bounds, lakes_sf_fl){
+  
+  dummy_geo <- county_bounds %>% filter(state %in% c('MN','ND','SD'))
+  png(filename = fileout, width = 6.5, height = 5.5, units = 'in', res = 500)
+  par(omi = c(0,0,0,0), mai = c(0,0,0,0), xaxs = 'i', yaxs = 'i')
+  
+  all_lakes_simple <- readRDS(lakes_sf_fl) %>% st_transform(crs = "+init=epsg:2811") %>% sf::st_simplify(dTolerance = 40) %>% 
+    st_transform(crs = "+init=epsg:4326")
+  
+  plot(st_geometry(dummy_geo), col = NA, border = NA, lwd = 0.1, reset = FALSE)
+  
+  plot(st_geometry(all_lakes_simple), col = 'grey70', border = 'grey70', lwd = 0.1, add = TRUE)
+  
+  county_bounds %>% st_geometry() %>% 
+    plot(col = NA, border = 'grey80', lwd = 0.2, add = TRUE)
+  
+  county_bounds %>% group_by(state) %>% summarise() %>% st_geometry() %>% 
+    plot(col = NA, border = 'grey40', lwd = 0.5, add = TRUE)
+  
+  modeled_lakes_sf <- all_lakes_simple %>% filter(site_id %in% model_ids)
+  plot(st_geometry(modeled_lakes_sf), col = 'dodgerblue', border = 'dodgerblue', lwd = 0.2, add = TRUE)
+  
+  dev.off()
+  
 }
 
 plot_grouped_lakes_preview <- function(fileout, spatial_groups, county_bounds, site_ids_grouped, lakes_sf_fl){
@@ -91,11 +117,11 @@ plot_grouped_lakes_preview <- function(fileout, spatial_groups, county_bounds, s
   
   plot(st_geometry(modeled_lakes_sf), col = 'dodgerblue', border = 'dodgerblue', lwd = 0.2, add = TRUE)
   
-  for (j in 1:nrow(spatial_groups)){
-    bbox <- st_bbox(spatial_groups[j,])
-    
-    text(bbox[1], bbox[2]+0.1, str_extract(spatial_groups[j,]$group_id, '[0-9]{2}'), pos = 4, cex = 0.8, offset = 0.1)
-  }
+  # for (j in 1:nrow(spatial_groups)){
+  #   bbox <- st_bbox(spatial_groups[j,])
+  #   
+  #   text(bbox[1], bbox[2]+0.1, str_extract(spatial_groups[j,]$group_id, '[0-9]{2}'), pos = 4, cex = 0.8, offset = 0.1)
+  # }
   
   dev.off()
   

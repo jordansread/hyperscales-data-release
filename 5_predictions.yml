@@ -26,6 +26,8 @@ targets:
       - out/5_predictions_zips.yml
       - out_data/05_group_lakes.png
   
+  # these tables should include hashes of the files
+  #verify the file hashes match pb0_src_trg_tasks.rds.ind and pb0_hyperscales_tasks.rds.ind?
   predictions_df:
     command: build_predict_df(site_id_list = model_export_ids, 
       model_dir = I('../lake-temperature-process-models/3_run/sync'), dummy = I('2020-01-28'))
@@ -35,10 +37,9 @@ targets:
     command: zip_prediction_groups(target_name, predictions_df,
       site_groups = site_ids_grouped)
   
-  out_data/05_group_lakes.png:
-    command: plot_grouped_lakes_preview(target_name, 
-      spatial_groups, site_ids_grouped, 
-      county_bounds = us_counties_sf, 
+  out_data/final_report_NCCASC_lakes.png:
+    command: plot_nccasc_lakes(target_name, county_bounds = us_counties_sf, 
+      model_ids = modeled_lake_ids,
       lakes_sf_fl = "../lake-temperature-model-prep/1_crosswalk_fetch/out/canonical_lakes_sf.rds")
 
 

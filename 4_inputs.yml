@@ -37,7 +37,7 @@ targets:
     
   ice_flags_df:
     command: build_predict_df(site_id_list = model_export_ids, 
-      model_dir = I('../lake-temperature-process-models/3_run/sync'), dummy = I('2020-01-28'))
+      model_dir = I('../lake-temperature-process-models/3_run/sync'), dummy = I('2020-07-24'))
     
   grouped_meteo_fls:
     command: group_meteo_fls(
