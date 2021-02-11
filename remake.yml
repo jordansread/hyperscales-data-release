@@ -51,8 +51,7 @@ targets:
       - log/04_inputs_sb_data.csv
       - log/04_inputs_sb_ice.csv
       - log/05_predictions_sb_data.csv # upload these manually w/ the large file uploader
-
-
+      - log/06_habitat_sb_data.csv
 
 # in case you want to mess w/ the xml alone:
   out_xml/00_parent.xml:
@@ -137,6 +136,13 @@ targets:
     command: render(filename = target_name,
       "in_text/text_SHARED.yml",
       "in_text/text_06_habitat.yml")
+  
+  log/06_habitat_sb_data.csv:
+    command: sb_replace_files(target_name, 
+      sbid_06_habitat,
+      'out_xml/06_habitat_sb.xml',
+      'out_data/6_glm2pb0_annual_metrics.csv', 
+      'out_data/6_glm2pball_annual_metrics.csv')
       
   # ------ SB IDs --------
   
