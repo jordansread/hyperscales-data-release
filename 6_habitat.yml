@@ -1,0 +1,21 @@
+target_default: 6_habitat
+
+packages:
+
+sources:
+
+targets:
+  6_habitat:
+    depends:
+      - out_data/6_glm2pb0_annual_metrics.csv
+      - out_data/6_glm2pball_annual_metrics.csv
+
+  out_data/6_glm2pb0_annual_metrics.csv:
+    command: file.copy(to = target_name,
+      from = '../lake-temperature-out/3_summarize/out/annual_metrics_glm2pb0.csv', 
+      overwrite = TRUE)
+  
+  out_data/6_glm2pball_annual_metrics.csv:
+    command: file.copy(to = target_name,
+      from = '../lake-temperature-out/3_summarize/out/annual_metrics_glm2pball.csv', 
+      overwrite = TRUE)
