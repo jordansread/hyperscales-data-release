@@ -73,6 +73,13 @@ entities:
       data-max: 48.88107
       data-units: decimal-degrees
     -
+      attr-label: SDF
+      attr-def: Shoreline development factor
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: unitless
+    -
       attr-label: state
       attr-def: >-
         Two letter abbreviated state name for each state overlapped by this lake. 
@@ -87,6 +94,13 @@ entities:
         County name for each county overlapped by this lake. 
         When more than one county, county names are separated by "|", such as "Lake|St. Louis"
       attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
+    -
+      attr-label: meteo_filename
+      attr-def: filename for meteorological information used to drive models for this lake.
+      attr-defs: this release
       data-min: NA
       data-max: NA
       data-units: NA
