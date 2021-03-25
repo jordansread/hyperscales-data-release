@@ -1,6 +1,11 @@
 title: >-
   Process-guided deep learning water temperature predictions: 6 Habitat metrics
 
+abstract: >-
+  This dataset summarized a collection of annual thermal metrics to characterize lake temperature impacts on 
+  fish habitat for 7,144 lakes from uncalibrated models (PB0) and 449 from calibrated models (PBALL). The dataset
+  includes over 172 annual thermal metrics.
+
 build-environment: >-
   This dataset was generated using the USGS Advanced Research Computing, USGS Yeti Supercomputer (https://doi.org/10.5066/F7D798MJ) and
   open source tools available in the R programming language (R version 3.6.3 (2020-02-29)).
