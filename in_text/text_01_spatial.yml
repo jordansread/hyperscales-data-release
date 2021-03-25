@@ -1,10 +1,10 @@
 title: >-
-  Process-guided deep learning water temperature predictions: 1 Spatial data (GIS polygons for 6,695 lakes)
+  Process-guided deep learning water temperature predictions: 1 Spatial data (GIS polygons for 7,144 lakes)
 
 abstract: >-
-  This dataset provides shapefile outlines of the 6,695 lakes that had temperature modeled as part of this study.
+  This dataset provides shapefile outlines of the 7,144 lakes that had temperature modeled as part of this study.
   The format is a shapefile for all lakes combined (.shp, .shx, .dbf, and .prj files). A csv file of lake metadata is also included. 
-  This dataset is part of a larger data release of lake temperature model inputs and outputs for 6,695 lakes in the U.S.
+  This dataset is part of a larger data release of lake temperature model inputs and outputs for 7,144 lakes in the U.S.
   states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9CA6XP8).
 
 cross-cites:
@@ -26,7 +26,7 @@ cross-cites:
 entities:
   -
     data-name: 01_spatial.zip
-    data-description: GIS polygon data for the 6,419 lakes included in this study
+    data-description: GIS polygon data for the 7,144 lakes included in this study
     attributes:
     -
       attr-label: site_id
@@ -39,7 +39,7 @@ entities:
       data-units: NA
   -
     data-name: 01_lake_metadata.csv
-    data-description: Select metadata for the 6,419 lakes included in this study
+    data-description: Select metadata for the 7,144 lakes included in this study
     attributes:
     -
       attr-label: site_id
