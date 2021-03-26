@@ -140,7 +140,8 @@ targets:
   out_xml/06_habitat_sb.xml:
     command: render(filename = target_name,
       "in_text/text_SHARED.yml",
-      "in_text/text_06_habitat.yml")
+      "in_text/text_06_habitat.yml",
+      spatial_metadata)
   
   log/06_habitat_sb_data.csv:
     command: sb_replace_files(target_name, 
