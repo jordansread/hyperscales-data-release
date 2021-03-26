@@ -1,10 +1,9 @@
 title: >-
   Process-guided deep learning water temperature predictions: 3 Temperature observations
 
-
 abstract: >-
-  Observed water temperatures from 1980-2018 were compiled for 5XX lakes in Minnesota and Wisconsin (USA). These data were used
-  as training data for process-guided deep learning models and deep learning models, and calibration data for process-based models.
+  Observed water temperatures from 1980-2018 were compiled for 449 lakes in Minnesota and Wisconsin (USA). These data were used
+  as calibration data for process-based models.
   The data are formatted as a single csv (comma separated values) file with attributes corresponding to the unique combination of
   lake identifier, time, and depth. Data came from a variety of sources, including the Water Quality Portal,
   the North Temperate Lakes Long-Term Ecological Research Project, and digitized temperature
