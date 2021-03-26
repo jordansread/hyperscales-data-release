@@ -19,8 +19,8 @@ cross-cites:
 
 entities:
   -
-    data-name: all_lakes_historical_training.csv
-    data-description: Training data for all 5XX lakes
+    data-name: 03_temperature_observations.zip
+    data-description: A zip file containing one csv of all temperature observation data for XXXX lakes
     attributes:
     -
       attr-label: site_id
@@ -52,5 +52,13 @@ entities:
       data-min: NA
       data-max: NA
       data-units: degrees C
+    -
+      attr-label: source
+      attr-def: The source of these data; a monitoring entity or the name of a file sent by a state agency
+      attr-defs: NA
+      data-min: NA
+      data-max: NA
+      data-units: NA
 
+process-date: !expr format(Sys.time(),'%Y%m%d')
 file-format: a single comma-delimited file
