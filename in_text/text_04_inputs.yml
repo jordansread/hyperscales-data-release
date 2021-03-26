@@ -4,6 +4,7 @@ title: >-
 abstract: >-
   This dataset includes model inputs (specifically, weather and flags for predicted ice-cover) and is part of a larger data release of lake temperature model inputs and outputs for 7,144 lakes in the U.S.
   states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9CA6XP8).
+
 cross-cites:
   -
     authors: ['Kenneth E. Mitchell','Dag Lohmann','Paul R. Houser','Eric F. Wood','John C. Schaake','Alan Robock','Brian A. Cosgrove','Justin Sheffield','Qingyun Duan','Lifeng Luo','R. Wayne Higgins','Rachel T. Pinker','J. Dan Tarpley','Dennis P. Lettenmaier','Curtis H. Marshall','Jared K. Entin','Ming Pan','Wei Shi','Victor Koren','Jesse Meng','Bruce H. Ramsay','Andrew A. Bailey']
@@ -18,14 +19,116 @@ cross-cites:
     pubdate: 2019
     link: https://doi.org/10.5194/gmd-12-473-2019
 
+entities:
+  -
+    data-name: ice_flags_{group_id}_N{minN-maxN}_W{minW-maxW}.zip
+    data-description: >-
+      A zip file containing a csv file for every lake within {group_id} with ice cover data. Files within the
+      zip are named "pb0_{site_id}_ice_flags.csv", where `site_id` is the lake nhdhr id.
+    attributes:
+      -
+        attr-label: date
+        attr-def: Date of ice cover estimate
+        attr-defs: NA
+        data-min: NA
+        data-max: NA
+        data-units: NA
+      -
+        attr-label: ice
+        attr-def: >-
+          These ice cover estimates were obtained by running GLM (Hipsey et al. 2019) and saving outputs at
+          daily resolution (nsave = 1) and using the glmtools R package (also described in Hipsey et al. 2019) to
+          extract hourly radiation just below the surface as simulated by the model (command was
+          glmtools::get_var(nc_daily, var_name = 'hice')), and exporting a value of "TRUE" if hice was greater than zero.
+        attr-defs: >-
+          Hipsey et al. 2019
+        data-min: FALSE
+        data-max: TRUE
+        data-units: logical (TRUE/FALSE)
+  -
+    data-name: inputs_{group_id}_N{minN-maxN}_W{minW-maxW}.zip
+    data-description: >-
+      A zip file containing a csv file for every lake within {group_id} with input data. Files within the
+      zip are named "nldas_meteo_N{minN-maxN}_W{minW-maxW}.csv" where the minN, maxN, minW, and maxW values define
+      the latitude and longitude bounding box of the individual meteological data cell (data are from Mitchell et al. 2004).
+    attributes:
+      -
+        attr-label: time
+        attr-def: Date of this weather estimate.
+        attr-defs: This data release
+        data-min: NA
+        data-max: NA
+        data-units: NA
+      -
+        attr-label: ShortWave
+        attr-def: >-
+          Incoming radiant energy with wavelengths between ~300 and ~3000 nm,
+          emitted by the sun and reaching the lake surface after passing through the atmosphere, as a daily average.
+        attr-defs: This data release
+        data-min: NA
+        data-max: NA
+        data-units: W m-2
+      -
+        attr-label: LongWave
+        attr-def: >-
+          Incoming thermal radiation at wavelengths > 3000 nm directed from the atmosphere to the lake surface, as a daily average.
+        attr-defs: This data release
+        data-min: NA
+        data-max: NA
+        data-units: W m-2
+      -
+        attr-label: AirTemp
+        attr-def: Air temperature above the surface of the lake, as a daily average.
+        attr-defs: This data release
+        data-min: NA
+        data-max: NA
+        data-units: degrees C
+      -
+        attr-label: RelHum
+        attr-def: Relative humidity of the air above the surface of the lake, as a daily average.
+        attr-defs: This data release
+        data-min: 0
+        data-max: 100
+        data-units: >-
+          %
+      -
+        attr-label: WindSpeed
+        attr-def: Speed of the wind above the lake, calculated to a daily number using the methods described in Winslow et al. 2017.
+        attr-defs: This data release
+        data-min: 0
+        data-max: NA
+        data-units: meters per second
+      -
+        attr-label: Rain
+        attr-def: Daily rate of rain reaching the lake surface in a day as described in Winslow et al. 2017; rate as determined by Hipsey et al. 2019.
+        attr-defs: This data release
+        data-min: 0
+        data-max: NA
+        data-units: m day−1
+      -
+        attr-label: Snow
+        attr-def: Daily rate of snow reaching the lake surface in a day as described in Winslow et al. 2017.
+        attr-defs: This data release
+        data-min: 0
+        data-max: NA
+        data-units: m day−1
+  -
+    data-name: 04_group_meteo.png
+    data-description: An image of the groupings describing the location of each of these files
+    attributes:
+      -
+        attr-label: PNG image
+        attr-def: NA
+        attr-defs: This data release
+        data-min: NA
+        data-max: NA
+        data-units: NA
 
 
 build-environment: Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.
 
 process-date: !expr format(Sys.time(),'%Y%m%d')
+file-format: 70 compressed files and one PNG file
 indirect-spatial: U.S.A.
 latitude-res: 0.1
 longitude-res: 0.1
-data-name: weather data and ice flags (model inputs)
-
-
