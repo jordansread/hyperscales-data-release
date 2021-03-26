@@ -1211,17 +1211,6 @@ entities:
         data-max: NA
         data-units: days
 
-purpose: Fisheries biology, limnological research, and climate science.
-start-date: 19791201
-end-date: 20181231
-
-update: none planned
-themekeywords: ["machine learning", "deep learning", "hybrid modeling", "water","temperature", "temperate lakes","reservoirs","modeling","climate change","thermal profiles"]
-
-usage-rules: >-
-  These data are open access usable via creative commons as long as original data providers are acknowledged
-descgeog: "Lake polygons as defined by the national hydrography dataset high resolution"
-data-publisher: U.S. Geological Survey
 indirect-spatial: U.S.A.
 latitude-res: 0.00001
 longitude-res: 0.00001
