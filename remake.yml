@@ -82,7 +82,8 @@ targets:
   out_xml/02_config_sb.xml:
     command: render(filename = target_name,
       "in_text/text_SHARED.yml",
-      "in_text/text_02_config.yml")
+      "in_text/text_02_config.yml",
+      spatial_metadata)
       
   log/02_config_sb_data.csv:
     command: sb_replace_files(target_name, 
@@ -96,7 +97,8 @@ targets:
   out_xml/03_observations_sb.xml:
     command: render(filename = target_name,
       "in_text/text_SHARED.yml",
-      "in_text/text_03_observations.yml")
+      "in_text/text_03_observations.yml",
+      spatial_metadata)
       
   log/03_observations_sb_data.csv:
     command: sb_replace_files(target_name, 
@@ -107,7 +109,8 @@ targets:
   out_xml/04_inputs_sb.xml:
     command: render(filename = target_name,
       "in_text/text_SHARED.yml",
-      "in_text/text_04_inputs.yml")
+      "in_text/text_04_inputs.yml",
+      spatial_metadata)
       
   log/04_inputs_sb_data.csv:
     command: sb_replace_files(target_name, 
@@ -124,7 +127,8 @@ targets:
   out_xml/05_predictions_sb.xml:
     command: render(filename = target_name,
       "in_text/text_SHARED.yml",
-      "in_text/text_05_predictions.yml")
+      "in_text/text_05_predictions.yml",
+      spatial_metadata)
   
   log/05_predictions_sb_data.csv:
     command: sb_replace_files(target_name, 
