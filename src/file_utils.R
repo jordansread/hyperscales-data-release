@@ -22,16 +22,27 @@ extract_model_from_table <- function(job_table_ind){
 }
 
 
-create_metadata_file <- function(fileout, sites, table, lakes_sf, lat_lon_fl, meteo_fl, gnis_names_fl){
+create_metadata_file <- function(fileout, sites, table, lakes_sf, nml_json_fl, lat_lon_fl, meteo_fl, gnis_names_fl){
   sdf <- sf::st_transform(lakes_sf, 2811) %>% 
     mutate(perim = lwgeom::st_perimeter_2d(Shape), area = sf::st_area(Shape), circle_perim = 2*pi*sqrt(area/pi), SDF = perim/circle_perim) %>% 
     sf::st_drop_geometry() %>% select(site_id, SDF) 
 
+  nml_list <- RJSONIO::fromJSON(nml_json_fl)
+  
+  basic_info <- purrr::map(names(nml_list), function(x){
+    this_nml <- nml_list[[x]]
+    class(this_nml) <- "nml"
+    tibble(site_id = x, depth_m = glmtools::get_nml_value(this_nml, 'lake_depth'),
+           area_m2 = tail(glmtools::get_nml_value(this_nml, "A"), 1))
+  }) %>% purrr::reduce(bind_rows)
+  
   sites %>% inner_join((readRDS(lat_lon_fl)), by = 'site_id') %>% 
     inner_join(sdf, by = 'site_id') %>% 
+    inner_join(basic_info, by = 'site_id') %>%
     rename(centroid_lon = longitude, centroid_lat = latitude) %>% 
     inner_join(table, by = 'site_id') %>% 
     inner_join(readRDS(meteo_fl), by = 'site_id') %>% 
+    mutate(meteo_fl = stringr::str_replace(meteo_fl, '367700', replacement = '359420')) %>% 
     inner_join((readRDS(gnis_names_fl)), by = 'site_id') %>% rename(lake_name = GNIS_Name, meteo_filename = meteo_fl) %>% 
     write_csv(fileout)
   
