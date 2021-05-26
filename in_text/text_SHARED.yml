@@ -1,9 +1,9 @@
-authors: ["Jordan S. Read", "Alison P. Appling", "Samantha K. Oliver", "Jacob A. Zwart","Xiaowei Jia", "Jared Willard", "Kelsey Vitense", "Gretchen J.A. Hansen", "Vipin Kumar"]
-pubdate: 2019
+authors: ["Jordan S. Read", "Alison P. Appling", "Samantha K. Oliver", "Jacob A. Zwart","Xiaowei Jia", "Jared Willard", "Kelsey Vitense", "Gretchen J.A. Hansen", "Vipin Kumar", "Hayley Corson-Dosch", "Lindsay Platt"]
+pubdate: 2021
 doi: http://dx.doi.org/10.5066/P9CA6XP8
 abstract: >-
   Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to climate change and give managers tools to manage individual lakes,
-  we focused on improving prediction accuracy for daily water temperature profiles in 12,XXX lakes in Minnesota and Wisconsin during 1980-2019.
+  we focused on improving prediction accuracy for daily water temperature profiles in 7,144 lakes in Minnesota and Wisconsin during 1980-2019.
 
 # ----associated publication----
 larger-cites:
@@ -12,9 +12,10 @@ larger-cites:
     title: >-
       Process-guided deep learning predictions of lake water temperature
     pubdate: 2019
+
 purpose: Fisheries biology, limnological research, and climate science.
-start-date: 19800401
-end-date: 20181231
+start-date: 19800101
+end-date: 20191231
 
 update: none planned
 themekeywords: ["machine learning", "deep learning", "hybrid modeling", "water","temperature", "temperate lakes","reservoirs","modeling","climate change","thermal profiles"]
@@ -48,13 +49,12 @@ metadata-date: !expr format(Sys.time(),'%Y%m%d')
 
 accur-test: No formal attribute accuracy tests were conducted.
 funding-credits: >-
-  This study was funded by the Department of the Interior
-  Northeast Climate Adaptation Science Center, the United States Geological Survey National Climate
+  This study was funded by the Department of the Interior Northeast and North Central Climate Adaptation Science Centers.
   This research used resources of the Core Science Analytics and Synthesis Advanced Research Computing program at the U.S. Geological Survey.
 
 process-description: >-
   At the core of the modeling framework is a lake hydrodynamic model that uses inputs of lake-specific properties and local meteorology to estimate water temperature.
-  Our chosen model is the open source, General Lake Model (GLM) version 3. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation,
+  Our chosen model is the open source, General Lake Model (GLM) version 2. GLM is a one-dimensional dynamical model which simplifies lakes using a vertical approximation,
   where horizontal variability is ignored. GLM uses a Lagrangian approach to layer structure where layers can split and combine based on changing vertical gradients.
   GLM is a modern, implementation of other one-dimensional models. We used GLM to run individual lake simulations according to the processes described in Winslow et al. 2017.
   Outputs for water temperature were extracted at various depths and written or summarized to the files included in this set of data. The glmtools R package was used for this processing.

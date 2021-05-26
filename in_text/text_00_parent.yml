@@ -4,21 +4,21 @@ title: >-
 abstract: >-
   <p>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to 
   climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water 
-  temperature profiles in 6,695 lakes in Minnesota and Wisconsin during 1980-2019.
+  temperature profiles in 7,144 lakes in Minnesota and Wisconsin during 1980-2019.
+  <br/>
   <br/>The data are organized into these items:</p>
   <ol>
-  <li><a href="https://www.sciencebase.gov/catalog/item/5db8194be4b0b0c58b5a4c3c">Spatial data</a> - A lake metadata file, and one shapefile of polygons for all 6,695 lakes in this study (.shp, .shx, .dbf, and .prj files)</li>
-  <li><a href="https://www.sciencebase.gov/catalog/item/5db81967e4b0b0c58b5a4c3f">Model configurations</a> - Model parameters and metadata used to configure models (1 JSON file, with metadata for each of 6,695 lakes, 
+  <li><a href="https://www.sciencebase.gov/catalog/item/5db8194be4b0b0c58b5a4c3c">Spatial data</a> - A lake metadata file, and one shapefile of polygons for all 7,144 lakes in this study (.shp, .shx, .dbf, and .prj files)</li>
+  <li><a href="https://www.sciencebase.gov/catalog/item/5db81967e4b0b0c58b5a4c3f">Model configurations</a> - Model parameters and metadata used to configure models (1 JSON file, with metadata for each of 7,144 lakes, 
   and one zip file with each lake's glm2.nml file)</li>
   <li><a href="https://www.sciencebase.gov/catalog/item/5db81985e4b0b0c58b5a4c41">Temperature observations</a> - Data formatted as model inputs for training, calibrating, or evaluating temperature models</li>
   <li><a href="https://www.sciencebase.gov/catalog/item/5db81996e4b0b0c58b5a4c43">Model inputs</a> - Data used to drive predictive models (35 zip files with ice-flags; 35 zip files with daily meteorological data)</li>
-  <li><a href="https://www.sciencebase.gov/catalog/item/5db819a8e4b0b0c58b5a4c45">Prediction data</a> - Predictions from PGDL and calibrated and uncalibrated PB models (35 zip files)</li>
-  <li><a href="https://www.sciencebase.gov/catalog/item/5db819bbe4b0b0c58b5a4c47">Predicted habitat</a> - Data formated for ecological use</li>
+  <li><a href="https://www.sciencebase.gov/catalog/item/5db819a8e4b0b0c58b5a4c45">Prediction data</a> - Predictions calibrated and uncalibrated PB models (35 zip files)</li>
+  <li><a href="https://www.sciencebase.gov/catalog/item/5db819bbe4b0b0c58b5a4c47">Predicted habitat</a> - Data formatted for ecological use</li>
   <br/>
-  <p>This research was funded by the Department of the Interior Northeast and North Central Climate Adaptation Science Centers,
-  a Midwest Glacial Lakes Fish Habitat Partnership grant through F&WS
-  Access to computing facilities was provided by USGS Advanced Research Computing, USGS Yeti Supercomputer (https://doi.org/10.5066/F7D798MJ).
-  We thank North Temperate Lakes Long-Term Ecological Research (NSF DEB-1440297) and Global Lake Ecological Observatory Network (NSF #1702991).
+  <p>This study was funded by the Department of the Interior Northeast and North Central Climate Adaptation Science Centers.
+  Access to computing facilities was provided by USGS Core Science Analytics and Synthesis Advanced Research Computing, 
+  USGS Yeti Supercomputer (https://doi.org/10.5066/F7D798MJ).</p>
 
 build-environment: Multiple computer systems were used to generate these data, including linux, OSX. The open source languages R and Python were used on all systems.
 

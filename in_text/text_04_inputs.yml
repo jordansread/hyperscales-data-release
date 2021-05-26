@@ -2,8 +2,9 @@ title: >-
   Process-guided deep learning water temperature predictions: 4 Model inputs (meteorological inputs and ice flags)
 
 abstract: >-
-  This dataset includes model inputs (specifically, weather and flags for predicted ice-cover) and is part of a larger data release of lake temperature model inputs and outputs for 6,695 lakes in the U.S.
+  This dataset includes model inputs (specifically, weather and flags for predicted ice-cover) and is part of a larger data release of lake temperature model inputs and outputs for 7,144 lakes in the U.S.
   states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9CA6XP8).
+
 cross-cites:
   -
     authors: ['Kenneth E. Mitchell','Dag Lohmann','Paul R. Houser','Eric F. Wood','John C. Schaake','Alan Robock','Brian A. Cosgrove','Justin Sheffield','Qingyun Duan','Lifeng Luo','R. Wayne Higgins','Rachel T. Pinker','J. Dan Tarpley','Dennis P. Lettenmaier','Curtis H. Marshall','Jared K. Entin','Ming Pan','Wei Shi','Victor Koren','Jesse Meng','Bruce H. Ramsay','Andrew A. Bailey']
@@ -18,14 +19,128 @@ cross-cites:
     pubdate: 2019
     link: https://doi.org/10.5194/gmd-12-473-2019
 
+entities:
+  -
+    data-name: ice_flags_{group_id}_N{minN-maxN}_W{minW-maxW}.zip
+    data-description: >-
+      A zip file containing a csv file for every lake within {group_id} with ice cover data. Files within the
+      zip are named "pb0_{site_id}_ice_flags.csv", where `site_id` is the lake nhdhr id.
+    attributes:
+      -
+        attr-label: date
+        attr-def: Date of ice cover estimate
+        attr-defs: NA
+        data-min: NA
+        data-max: NA
+        data-units: NA
+      -
+        attr-label: ice
+        attr-def: >-
+          These ice cover estimates were obtained by running GLM (Hipsey et al. 2019) and saving outputs at
+          daily resolution (nsave = 1) and using the glmtools R package (also described in Hipsey et al. 2019) to
+          extract hourly radiation just below the surface as simulated by the model (command was
+          glmtools::get_var(nc_daily, var_name = 'hice')), and exporting a value of "TRUE" if hice was greater than zero.
+        attr-defs: >-
+          Hipsey et al. 2019
+        data-min: FALSE
+        data-max: TRUE
+        data-units: logical (TRUE/FALSE)
+  -
+    data-name: inputs_{group_id}_N{minN-maxN}_W{minW-maxW}.zip
+    data-description: >-
+      A zip file containing a csv file for every lake within {group_id} with input data. Files within the
+      zip are named "nldas_meteo_N{minN-maxN}_W{minW-maxW}.csv" where the minN, maxN, minW, and maxW values define
+      the latitude and longitude bounding box of the individual meteological data cell (data are from Mitchell et al. 2004).
+    attributes:
+      -
+        attr-label: time
+        attr-def: Date of this weather estimate.
+        attr-defs: This data release
+        data-min: NA
+        data-max: NA
+        data-units: NA
+      -
+        attr-label: ShortWave
+        attr-def: >-
+          Incoming radiant energy with wavelengths between ~300 and ~3000 nm,
+          emitted by the sun and reaching the lake surface after passing through the atmosphere, as a daily average.
+        attr-defs: This data release
+        data-min: NA
+        data-max: NA
+        data-units: W m-2
+      -
+        attr-label: LongWave
+        attr-def: >-
+          Incoming thermal radiation at wavelengths > 3000 nm directed from the atmosphere to the lake surface, as a daily average.
+        attr-defs: This data release
+        data-min: NA
+        data-max: NA
+        data-units: W m-2
+      -
+        attr-label: AirTemp
+        attr-def: Air temperature above the surface of the lake, as a daily average.
+        attr-defs: This data release
+        data-min: NA
+        data-max: NA
+        data-units: degrees C
+      -
+        attr-label: RelHum
+        attr-def: Relative humidity of the air above the surface of the lake, as a daily average.
+        attr-defs: This data release
+        data-min: 0
+        data-max: 100
+        data-units: >-
+          %
+      -
+        attr-label: WindSpeed
+        attr-def: Speed of the wind above the lake, calculated to a daily number using the methods described in Winslow et al. 2017.
+        attr-defs: This data release
+        data-min: 0
+        data-max: NA
+        data-units: meters per second
+      -
+        attr-label: Rain
+        attr-def: Daily rate of rain reaching the lake surface in a day as described in Winslow et al. 2017; rate as determined by Hipsey et al. 2019.
+        attr-defs: This data release
+        data-min: 0
+        data-max: NA
+        data-units: m day−1
+      -
+        attr-label: Snow
+        attr-def: Daily rate of snow reaching the lake surface in a day as described in Winslow et al. 2017.
+        attr-defs: This data release
+        data-min: 0
+        data-max: NA
+        data-units: m day−1
+  -
+    data-name: 04_group_meteo.png
+    data-description: An image of the groupings describing the location of each of these files
+    attributes:
+      -
+        attr-label: PNG image
+        attr-def: NA
+        attr-defs: This data release
+        data-min: NA
+        data-max: NA
+        data-units: NA
 
-
-build-environment: Multiple computer systems were used to generate these data, including linux, OSX. The open source language R was used on all systems, as well as the open-source model GLM.
+build-environment: >-
+  For PB and PB0 predictions we used USGS Advanced Research Computing, USGS Yeti Supercomputer (https://doi.org/10.5066/F7D798MJ); 
+  process-based predictions were generated with the following open source tools available in the R programming language (R version 3.6.3 (2020-02-29)).
+  The computing platform for generating data and metadata was x86_64-redhat-linux-gnu. 
+  R packages loaded into this environment: dplyr, version: 1.0.0; glmtools, version: 0.15.0; 
+  rLakeAnalyzer, version: 1.11.4.1; GLMr, version: 3.1.14; mapdata, version: 2.3.0; maps, version: 3.3.0.
+  The computing platform for generating data and metadata was x86_64-apple-darwin15.6.0 using R programming language (R version 3.6.3 (2020-02-29)).
+  R packages loaded into this environment: ggplot2, version: 3.3.2; lwgeom, version: 0.2-5; dataRetrieval, version: 2.7.6; reticulate, version: 1.16; 
+  sf, version: 0.9-6; dssecrets, version: 0.1.4; purrr, version: 0.3.4; RcppCNPy, version: 0.2.10; 
+  sbtools, version: 1.1.12; RJSONIO, version: 1.3-1.4; glmtools, version: 0.15.0; 
+  rLakeAnalyzer, version: 1.11.4.1; GLMr, version: 3.1.16; stringr, version: 1.4.0; rgdal, version: 1.5-16; 
+  sp, version: 1.4-2; httr, version: 1.4.2; feather, version: 0.3.5; readr, version: 1.3.1; meddle, version: 0.0.11; 
+  mapdata, version: 2.3.0; maps, version: 3.3.0; tidyr, version: 1.1.2; dplyr, version: 1.0.2; whisker, version: 0.4; 
+  yaml, version: 2.2.1; scipiper, version: 0.0.22.
 
 process-date: !expr format(Sys.time(),'%Y%m%d')
+file-format: 70 compressed files and one PNG file
 indirect-spatial: U.S.A.
 latitude-res: 0.1
 longitude-res: 0.1
-data-name: weather data and ice flags (model inputs)
-
-
