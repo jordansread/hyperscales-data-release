@@ -25,6 +25,6 @@ targets:
 
   out_data/03_temperature_observations.zip:
     command: zip_temp_obs(target_name, 
-      '../lake-temperature-model-prep/7b_temp_merge/out/merged_temp_data_daily.feather')
+      '/Volumes/ThunderBlade/HOLDER_TEMP_R/lake-temperature-model-prep/7b_temp_merge/out/merged_temp_data_daily.feather')
 
 

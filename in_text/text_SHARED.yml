@@ -18,7 +18,7 @@ start-date: 19800101
 end-date: 20191231
 
 update: none planned
-themekeywords: ["machine learning", "deep learning", "hybrid modeling", "water","temperature", "temperate lakes","reservoirs","modeling","climate change","thermal profiles"]
+themekeywords: ["hybrid modeling", "water","temperature", "temperate lakes","reservoirs","modeling","climate change","thermal profiles"]
 
 usage-rules: >-
   These data are subject to change and are not citable until reviewed and approved for official publication by the USGS

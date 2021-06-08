@@ -1,5 +1,5 @@
 title: >-
-  Process-guided deep learning water temperature predictions: 4 Model inputs (meteorological inputs and ice flags)
+  Process-based water temperature predictions: 4 Model inputs (meteorological inputs and ice flags)
 
 abstract: >-
   This dataset includes model inputs (specifically, weather and flags for predicted ice-cover) and is part of a larger data release of lake temperature model inputs and outputs for 7,144 lakes in the U.S.
