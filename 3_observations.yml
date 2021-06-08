@@ -25,6 +25,8 @@ targets:
 
   out_data/03_temperature_observations.zip:
     command: zip_temp_obs(target_name, 
-      '/Volumes/ThunderBlade/HOLDER_TEMP_R/lake-temperature-model-prep/7b_temp_merge/out/merged_temp_data_daily.feather')
+      '/Volumes/ThunderBlade/HOLDER_TEMP_R/lake-temperature-model-prep/7b_temp_merge/out/merged_temp_data_daily.feather', 
+      site_ids = modeled_lake_ids, 
+      time_range = I(c('1980-01-01','2019-12-31')))
 
 

@@ -231,7 +231,9 @@ zip_ice_flags_groups <- function(outfile, file_info_df, site_groups){
   scipiper::sc_indicate(outfile, data_file = data_files)
 }
 
-zip_temp_obs <- function(outfile, temp_feather){
+zip_temp_obs <- function(outfile, temp_feather, site_ids, time_range){
+  start_date <- as.Date(time_range[1])
+  stop_date <- as.Date(time_range[2])
 
   cd <- getwd()
   on.exit(setwd(cd))
@@ -241,6 +243,8 @@ zip_temp_obs <- function(outfile, temp_feather){
   csv_path <- file.path(tempdir(), csv_file)
   
   feather::read_feather(temp_feather) %>% 
+    filter(date >= start_date & date <= stop_date, site_id %in% site_ids) %>% 
+    select(-source) %>% 
     write_csv(path = csv_path)
   
   setwd(dirname(csv_path))
