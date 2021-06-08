@@ -2,12 +2,12 @@ title: >-
   Process-based water temperature predictions: 3 Temperature observations
 
 abstract: >-
-  Observed water temperatures from 1980-2019 were compiled for 5,584 lakes in Minnesota and Wisconsin (USA). These data were used
-  as calibration data for a subset of the process-based models (see "pball" models).
+  Observed water temperatures from 1980-2019 were compiled for 5,584 lakes in Minnesota and Wisconsin (USA). A subset of these data were used
+  as calibration for process-based models on some lakes (see "pball" models).
   The data are formatted as a single csv (comma separated values) file with attributes corresponding to the unique combination of
   lake identifier, time, and depth. Data came from a variety of sources, including the Water Quality Portal,
   the North Temperate Lakes Long-Term Ecological Research Project, and digitized temperature
-  records from the MN Department of Natural Resources.
+  records from the MN Department of Natural Resources. Upper and Lower Red Lake data were filtered out of this release. 
 
 cross-cites:
   -
@@ -55,7 +55,7 @@ entities:
 
 
 process-date: !expr format(Sys.time(),'%Y%m%d')
-file-format: a single comma-delimited file
+file-format: a zipped single comma-delimited file
 
 indirect-spatial: U.S.A.
 latitude-res: 0.1

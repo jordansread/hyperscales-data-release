@@ -232,6 +232,15 @@ zip_ice_flags_groups <- function(outfile, file_info_df, site_groups){
 }
 
 zip_temp_obs <- function(outfile, temp_feather, site_ids, time_range){
+  
+  remove_sources <- c('7a_temp_coop_munge/tmp/upper_red_bottom_temp_DO_4metersdeep.rds',
+                      '7a_temp_coop_munge/tmp/upper_red_surface_DO_temps.rds',
+                      '7a_temp_coop_munge/tmp/lower_red_bottom_temp_DO_9metersdeep_2017.rds',
+                      '7a_temp_coop_munge/tmp/lower_red_bottom2010.rds',
+                      '7a_temp_coop_munge/tmp/lower_red_bottom2013.rds',
+                      '7a_temp_coop_munge/tmp/lower_red_bottom2014.rds',
+                      '7a_temp_coop_munge/tmp/lower_red_surface_DO_temp_2017.rds',
+                      '7a_temp_coop_munge/tmp/lower_red_bottom2015.rds')
   start_date <- as.Date(time_range[1])
   stop_date <- as.Date(time_range[2])
 
@@ -243,7 +252,7 @@ zip_temp_obs <- function(outfile, temp_feather, site_ids, time_range){
   csv_path <- file.path(tempdir(), csv_file)
   
   feather::read_feather(temp_feather) %>% 
-    filter(date >= start_date & date <= stop_date, site_id %in% site_ids) %>% 
+    filter(date >= start_date & date <= stop_date, site_id %in% site_ids, !source %in% remove_sources) %>% 
     select(-source) %>% 
     write_csv(path = csv_path)
   
