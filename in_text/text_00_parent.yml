@@ -20,7 +20,7 @@ abstract: >-
   Access to computing facilities was provided by USGS Core Science Analytics and Synthesis Advanced Research Computing, 
   USGS Yeti Supercomputer (https://doi.org/10.5066/F7D798MJ).</p>
 
-build-environment: Multiple computer systems were used to generate these data, including linux, OSX. The open source languages R and Python were used on all systems.
+build-environment: Multiple computer systems were used to generate these data, including Linux, OSX. The open source languages R and Python were used on all systems.
 
 process-date: !expr format(Sys.time(),'%Y%m%d')
 indirect-spatial: U.S.A.
