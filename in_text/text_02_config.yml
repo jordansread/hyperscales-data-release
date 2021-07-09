@@ -102,7 +102,8 @@ entities:
   -
     data-name: pb0_nml_files.zip
     data-description: >- 
-      A zip file containing many glm2.nml files, one for each of the 7,144 lakes used with the uncalibrated (PB0) models in this study
+      A zip file containing many glm2.nml files, one for each of the 7,144 lakes used with the uncalibrated (PB0) 
+      models in this study. Files within the zip are named "{site_id}.nml", where {site_id} is the lake nhdhr id.
     attributes:
     -
       attr-label: glm_setup
@@ -252,7 +253,8 @@ entities:
   -
     data-name: pball_nml_files.zip
     data-description: >- 
-      A zip file containing many glm2.nml files, one for each of the 449 lakes used with the calibrated (PBALL) models in this study
+      A zip file containing many glm2.nml files, one for each of the 449 lakes used with the calibrated (PBALL) 
+      models in this study. Files within the zip are named "pball_{site_id}.nml", where {site_id} is the lake nhdhr id.
     attributes:
     -
       attr-label: glm_setup
