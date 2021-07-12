@@ -33,6 +33,7 @@ create_metadata_file <- function(fileout, sites, table, lakes_sf, lat_lon_fl, me
     inner_join(table, by = 'site_id') %>% 
     inner_join(readRDS(meteo_fl), by = 'site_id') %>% 
     inner_join((readRDS(gnis_names_fl)), by = 'site_id') %>% rename(lake_name = GNIS_Name, meteo_filename = meteo_fl) %>% 
+    mutate(meteo_filename = stringr::str_replace(meteo_filename, '367700', replacement = '359420')) %>% 
     write_csv(fileout)
   
 }
