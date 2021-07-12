@@ -2,7 +2,7 @@ title: >-
   Process-based water temperature predictions: 4 Model inputs (meteorological inputs and ice flags)
 
 abstract: >-
-  This dataset includes model inputs (specifically, weather and flags for predicted ice-cover) and is part of a larger data release of lake temperature model inputs and outputs for 7,144 lakes in the U.S.
+  This dataset includes model inputs (specifically, weather and flags for predicted ice-cover) and is part of a larger data release of lake temperature model inputs and outputs for 7,150 lakes in the U.S.
   states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9CA6XP8).
 
 cross-cites:

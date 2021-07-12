@@ -4,12 +4,12 @@ title: >-
 abstract: >-
   <p>Climate change has been shown to influence lake temperatures in different ways. To better understand the diversity of lake responses to 
   climate change and give managers tools to manage individual lakes, we focused on improving prediction accuracy for daily water 
-  temperature profiles in 7,144 lakes in Minnesota and Wisconsin during 1980-2019.
+  temperature profiles in 7,150 lakes in Minnesota and Wisconsin during 1980-2019.
   <br/>
   <br/>The data are organized into these items:</p>
   <ol>
-  <li><a href="https://www.sciencebase.gov/catalog/item/5db8194be4b0b0c58b5a4c3c">Spatial data</a> - A lake metadata file, and one shapefile of polygons for all 7,144 lakes in this study (.shp, .shx, .dbf, and .prj files)</li>
-  <li><a href="https://www.sciencebase.gov/catalog/item/5db81967e4b0b0c58b5a4c3f">Model configurations</a> - Model parameters and metadata used to configure models (1 JSON file, with metadata for each of 7,144 lakes, 
+  <li><a href="https://www.sciencebase.gov/catalog/item/5db8194be4b0b0c58b5a4c3c">Spatial data</a> - A lake metadata file, and one shapefile of polygons for all 7,150 lakes in this study (.shp, .shx, .dbf, and .prj files)</li>
+  <li><a href="https://www.sciencebase.gov/catalog/item/5db81967e4b0b0c58b5a4c3f">Model configurations</a> - Model parameters and metadata used to configure models (1 JSON file, with metadata for each of 7,150 lakes, 
   and one zip file with each lake's glm2.nml file)</li>
   <li><a href="https://www.sciencebase.gov/catalog/item/5db81985e4b0b0c58b5a4c41">Temperature observations</a> - Data formatted as model inputs for training, calibrating, or evaluating temperature models</li>
   <li><a href="https://www.sciencebase.gov/catalog/item/5db81996e4b0b0c58b5a4c43">Model inputs</a> - Data used to drive predictive models (35 zip files with ice-flags; 35 zip files with daily meteorological data)</li>

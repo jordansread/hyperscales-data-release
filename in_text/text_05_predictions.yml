@@ -4,7 +4,7 @@ title: >-
 abstract: >-
   Multiple modeling frameworks were used to predict daily temperatures at 0.5m depth intervals for a set of diverse lakes in the U.S.
   states of Minnesota and Wisconsin. General Lake Model verion 2 process-Based (PB) models were configured and calibrated with training data to reduce root-mean squared error for 449 lakes (PBALL).
-  Uncalibrated models used default configurations (PB0; see Winslow et al. 2016 for details) and no parameters were adjusted according to model fit with observations for 7,144 lakes.
+  Uncalibrated models used default configurations (PB0; see Winslow et al. 2016 for details) and no parameters were adjusted according to model fit with observations for 7,150 lakes.
 
 cross-cites:
   -
