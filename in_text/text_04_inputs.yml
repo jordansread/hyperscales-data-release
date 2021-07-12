@@ -49,8 +49,8 @@ entities:
     data-name: inputs_{group_id}_N{minN-maxN}_W{minW-maxW}.zip
     data-description: >-
       A zip file containing a csv file for every lake within {group_id} with input data. Files within the
-      zip are named "nldas_meteo_N{minN-maxN}_W{minW-maxW}.csv" where the minN, maxN, minW, and maxW values define
-      the latitude and longitude bounding box of the individual meteological data cell (data are from Mitchell et al. 2004).
+      zip are named "NLDAS_time[0.359420]_x{x}_y{y}.csv" where the x and y locations are longitude and latitude indices from NLDAS
+      of the individual meteological data cell (data are from Mitchell et al. 2004).
     attributes:
       -
         attr-label: time
