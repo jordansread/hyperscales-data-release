@@ -22,6 +22,27 @@ cross-cites:
     pubdate: 2016
     form: data release
     link: http://dx.doi.org/10.5066/F7DV1H10
+  - 
+    authors: [
+      'Patricia A. Soranno', 'Linda C. Bacon', 'Michael Beauchene', 'Karen E. Bednar', 'Edward G. Bissell', 'Claire K. Boudreau', 
+      'Marvin G. Boyer', 'Mary T. Bremigan', 'Stephen R. Carpenter', 'Jamie W. Carr', 'Kendra S. Cheruvelil', 'Samuel T. Christel', 
+      'Matt Claucherty', 'Sarah M. Collins', 'Joseph D. Conroy', 'John A. Downing', 'Jed Dukett', 'C. Emi Fergus', 
+      'Christopher T. Filstrup', 'Clara Funk', 'Maria J. Gonzalez', 'Linda T. Green', 'Corinna Gries', 'John D. Halfman', 
+      'Stephen K. Hamilton', 'Paul C. Hanson', 'Emily N. Henry', 'Elizabeth M. Herron', 'Celeste Hockings', 'James R. Jackson', 
+      'Kari Jacobson-Hedin', 'Lorraine L. Janus', 'William W. Jones', 'John R. Jones', 'Caroline M. Keson', 'Katelyn B.S. King', 
+      'Scott A. Kishbaugh', 'Jean-Francois Lapierre', 'Barbara Lathrop', 'Jo A. Latimore', 'Yuehlin Lee', 'Noah R. Lottig', 
+      'Jason A. Lynch', 'Leslie J. Matthews', 'William H. McDowell', 'Karen E.B. Moore', 'Brian Neff', 'Sarah J. Nelson', 
+      'Samantha K. Oliver', 'Michael L. Pace', 'Donald C. Pierson', 'Autumn C. Poisson', 'Amina I. Pollard', 'David M. Post', 
+      'Paul O. Reyes', 'Donald Rosenberry', 'Karen M. Roy', 'Lars G. Rudstam', 'Orlando Sarnelle', 'Nancy J. Schuldt', 
+      'Caren E. Scott', 'Nicholas K. Skaff', 'Nicole J. Smith', 'Nick R. Spinelli', 'Joseph J. Stachelek', 'Emily H. Stanley', 
+      'John L. Stoddard', 'Scott B. Stopyak', 'Craig A. Stow', 'Jason M. Tallant', 'Pang-Ning Tan', 'Anthony P. Thorpe', 
+      'Michael J. Vanni', 'Tyler Wagner', 'Gretchen Watkins', 'Kathleen C. Weathers', 'Katherine E. Webster', 'Jeffrey D. White', 
+      'Marcy K. Wilmes', 'Shuai Yuan']
+    title: >-
+      LAGOS-NE: a multi-scaled geospatial and temporal database of lake ecological context and water quality for thousands of US lakes
+    pubdate: 2017
+    form: publication
+    link: https://doi.org/10.1093/gigascience/gix101
 
 entities:
   -
@@ -38,7 +59,9 @@ entities:
       data-units: NA
     -
       attr-label: morphometry
-      attr-def: parameters describing the depth/area relationship of the lake for the General Lake Model
+      attr-def: >- 
+        parameters describing the depth/area relationship of the lake for the General Lake Model. Some of the depth 
+        data came from the LAGOS NE dataset (Soranno et al. 2017)
       attr-defs: Hipsey et al. 2019
       data-min: NA
       data-max: NA
@@ -114,7 +137,9 @@ entities:
       data-units: NA
     -
       attr-label: morphometry
-      attr-def: parameters describing the depth/area relationship of the lake for the General Lake Model
+      attr-def: >- 
+        parameters describing the depth/area relationship of the lake for the General Lake Model. Some of the depth 
+        data came from the LAGOS NE dataset (Soranno et al. 2017)
       attr-defs: Hipsey et al. 2019
       data-min: NA
       data-max: NA
@@ -189,7 +214,9 @@ entities:
       data-units: NA
     -
       attr-label: morphometry
-      attr-def: parameters describing the depth/area relationship of the lake for the General Lake Model
+      attr-def: >- 
+        parameters describing the depth/area relationship of the lake for the General Lake Model. Some of the depth 
+        data came from the LAGOS NE dataset (Soranno et al. 2017)
       attr-defs: Hipsey et al. 2019
       data-min: NA
       data-max: NA
@@ -265,7 +292,9 @@ entities:
       data-units: NA
     -
       attr-label: morphometry
-      attr-def: parameters describing the depth/area relationship of the lake for the General Lake Model
+      attr-def: >- 
+        parameters describing the depth/area relationship of the lake for the General Lake Model. Some of the depth 
+        data came from the LAGOS NE dataset (Soranno et al. 2017)
       attr-defs: Hipsey et al. 2019
       data-min: NA
       data-max: NA
