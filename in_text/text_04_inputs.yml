@@ -114,7 +114,10 @@ entities:
         data-units: m day−1
   -
     data-name: 04_group_meteo.png
-    data-description: An image of the groupings describing the location of each of these files
+    data-description: >-
+      An image map of the individual meteological data cells (data cells from Mitchell et al. 2004) in pink on
+      top of a map of the U.S. Midwest with state and county boundaries. Numeric values from 1 to 35 are overlaid
+      on top of the cells and correspond to the group number used in the filenames for the `inputs_*.zip` files. 
     attributes:
       -
         attr-label: PNG image

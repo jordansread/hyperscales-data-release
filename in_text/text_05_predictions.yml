@@ -57,7 +57,12 @@ entities:
         data-units: degrees C
   -
     data-name: 05_group_lakes.png
-    data-description: An image of the lakes that have temperature predictions for either model
+    data-description: >-
+      An image map of the lakes that have temperature predictions for either model on top
+      of a map of the U.S. Midwest with state and county boundaries. There are also multi-colored
+      rectangles with numeric values from 1 to 35 overlaid on the map, which correspond to the 
+      group number used in the filenames for the `predictions_*.zip` files to help users locate 
+      data if they are interested in a specific area. 
     attributes:
       -
         attr-label: PNG image
