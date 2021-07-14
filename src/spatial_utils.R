@@ -69,7 +69,7 @@ plot_groups <- function(fileout, spatial_groups, county_bounds, lakes_sf_fl){
   
   plot(st_geometry(all_lakes_simple), col = 'grey70', border = 'grey70', lwd = 0.1, add = TRUE)
   
-  #plot(st_geometry(spatial_groups), col = paste0(spatial_groups$col, '4D'), border = 'grey70', lwd = 0.1, add = TRUE)
+  plot(st_geometry(spatial_groups), col = paste0(spatial_groups$col, '4D'), border = 'grey70', lwd = 0.1, add = TRUE)
   
   county_bounds %>% st_geometry() %>% 
     plot(col = NA, border = 'grey80', lwd = 0.2, add = TRUE)
@@ -117,11 +117,11 @@ plot_grouped_lakes_preview <- function(fileout, spatial_groups, county_bounds, s
   
   plot(st_geometry(modeled_lakes_sf), col = 'dodgerblue', border = 'dodgerblue', lwd = 0.2, add = TRUE)
   
-  # for (j in 1:nrow(spatial_groups)){
-  #   bbox <- st_bbox(spatial_groups[j,])
-  #   
-  #   text(bbox[1], bbox[2]+0.1, str_extract(spatial_groups[j,]$group_id, '[0-9]{2}'), pos = 4, cex = 0.8, offset = 0.1)
-  # }
+  for (j in 1:nrow(spatial_groups)){
+    bbox <- st_bbox(spatial_groups[j,])
+
+    text(bbox[1], bbox[2]+0.1, str_extract(spatial_groups[j,]$group_id, '[0-9]{2}'), pos = 4, cex = 0.8, offset = 0.1)
+  }
   
   dev.off()
   
