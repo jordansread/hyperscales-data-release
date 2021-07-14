@@ -1,10 +1,10 @@
 title: >-
-  Process-based water temperature predictions: 1 Spatial data (GIS polygons for 7,144 lakes)
+  Process-based water temperature predictions in the Midwest US: 1 Spatial data (GIS polygons for 7,150 lakes)
 
 abstract: >-
-  This dataset provides shapefile outlines of the 7,144 lakes that had temperature modeled as part of this study.
+  This dataset provides shapefile outlines of the 7,150 lakes that had temperature modeled as part of this study.
   The format is a shapefile for all lakes combined (.shp, .shx, .dbf, and .prj files). A csv file of lake metadata is also included. 
-  This dataset is part of a larger data release of lake temperature model inputs and outputs for 7,144 lakes in the U.S.
+  This dataset is part of a larger data release of lake temperature model inputs and outputs for 7,150 lakes in the U.S.
   states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9CA6XP8).
 
 cross-cites:
@@ -26,12 +26,14 @@ cross-cites:
 entities:
   -
     data-name: 01_spatial.zip
-    data-description: GIS polygon data for the 7,144 lakes included in this study
+    data-description: GIS polygon data for the 7,150 lakes included in this study
     attributes:
     -
       attr-label: site_id
       attr-def: >-
-        Lake identification number for this dataset. Is the Prmnn_I from NHD high-res prefixed with source, as "nhdhr_{Prmnn_I}"
+        Lake identification number for this dataset. It is the Prmnn_I from NHD high-res prefixed 
+        with source, as "nhdhr_{Prmnn_I}". The ids have a mix of characters and some can include
+        special characters, such as "{" and "}".
       attr-defs: >-
         http://nhd.usgs.gov/
       data-min: NA
@@ -39,12 +41,14 @@ entities:
       data-units: NA
   -
     data-name: 01_lake_metadata.csv
-    data-description: Select metadata for the 7,144 lakes included in this study
+    data-description: Select metadata for the 7,150 lakes included in this study
     attributes:
     -
       attr-label: site_id
       attr-def: >-
-        Lake identification number for this dataset. Is the Prmnn_I from NHD high-res prefixed with source, as "nhdhr_{Prmnn_I}"
+        Lake identification number for this dataset. It is the Prmnn_I from NHD high-res prefixed 
+        with source, as "nhdhr_{Prmnn_I}". The ids have a mix of characters and some can include
+        special characters, such as "{" and "}".
       attr-defs: >-
         http://nhd.usgs.gov/
       data-min: NA
@@ -54,6 +58,7 @@ entities:
       attr-label: group_id
       attr-def: >-
         group identifier for files that are spatially grouped in this data release. Groups are based on lat/lon bounding boxes. 
+        Some group ids will have leading zeros.
       attr-defs: NA
       data-min: NA
       data-max: NA
@@ -62,15 +67,15 @@ entities:
       attr-label: centroid_lon 
       attr-def: longitude (decimal-degrees) of the centroid of this lake (for purposes of calculating group_id and linking meteorological data cells)
       attr-defs: NA
-      data-min: -99.42552
+      data-min: -104.0117
       data-max: -83.08698
       data-units: decimal-degrees
     -
       attr-label: centroid_lat
       attr-def: latitude (decimal-degrees) of the centroid of this lake (for purposes of calculating group_id and linking meteorological data cells)
       attr-defs: NA
-      data-min: 40.9117
-      data-max: 48.88107
+      data-min: 37.13825
+      data-max: 49.05203
       data-units: decimal-degrees
     -
       attr-label: SDF

@@ -1,8 +1,8 @@
 title: >-
-  Process-based water temperature predictions: 4 Model inputs (meteorological inputs and ice flags)
+  Process-based water temperature predictions in the Midwest US: 4 Model inputs (meteorological inputs and ice flags)
 
 abstract: >-
-  This dataset includes model inputs (specifically, weather and flags for predicted ice-cover) and is part of a larger data release of lake temperature model inputs and outputs for 7,144 lakes in the U.S.
+  This dataset includes model inputs (specifically, weather and flags for predicted ice-cover) and is part of a larger data release of lake temperature model inputs and outputs for 7,150 lakes in the U.S.
   states of Minnesota and Wisconsin (http://dx.doi.org/10.5066/P9CA6XP8).
 
 cross-cites:
@@ -11,12 +11,14 @@ cross-cites:
     title: >-
       The multi-institution North American Land Data Assimilation System (NLDAS): Utilizing multiple GCIP products and partners in a continental distributed hydrological modeling system
     pubdate: 2004
+    form: publication
     link: http://dx.doi.org/10.1029/2003JD003823
   -
     authors: ['Matthew R. Hipsey', 'Louise C. Bruce', 'Casper Boon', 'Brendan Busch', 'Cayelan C. Carey', 'David P. Hamilton', 'Paul C. Hanson', 'Jordan S. Read', 'Eduardo de Sousa', 'Michael Weber', 'Luke A. Winslow']
     title: >-
       A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON).
     pubdate: 2019
+    form: publication
     link: https://doi.org/10.5194/gmd-12-473-2019
 
 entities:
@@ -114,7 +116,10 @@ entities:
         data-units: m day−1
   -
     data-name: 04_group_meteo.png
-    data-description: An image of the groupings describing the location of each of these files
+    data-description: >-
+      An image map of the individual meteological data cells (data cells from Mitchell et al. 2004) in pink on
+      top of a map of the U.S. Midwest with state and county boundaries. Numeric values from 1 to 35 are overlaid
+      on top of the cells and correspond to the group number used in the filenames for the `inputs_*.zip` files. 
     attributes:
       -
         attr-label: PNG image

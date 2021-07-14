@@ -10,7 +10,7 @@ packages:
   - whisker
   - dplyr
   - tidyr
-  - meddle # at least v0.0.8
+  - meddle # at least v0.0.16
   - readr
   - feather
   - httr

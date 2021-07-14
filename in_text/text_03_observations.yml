@@ -1,5 +1,5 @@
 title: >-
-  Process-based water temperature predictions: 3 Temperature observations
+  Process-based water temperature predictions in the Midwest US: 3 Temperature observations
 
 abstract: >-
   Observed water temperatures from 1980-2019 were compiled for 5,584 lakes in Minnesota and Wisconsin (USA). A subset of these data were used
@@ -15,6 +15,7 @@ cross-cites:
     title: >-
       Large-scale modeled contemporary and future water temperature estimates for 10,774 Midwestern U.S. Lakes
     pubdate: 2017
+    form: publication
     link: http://dx.doi.org/10.1038/sdata.2017.53
 
 entities:

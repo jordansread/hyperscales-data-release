@@ -1,10 +1,10 @@
 title: >-
-  Process-based water temperature predictions: 5 Model prediction data
+  Process-based water temperature predictions in the Midwest US: 5 Model prediction data
 
 abstract: >-
   Multiple modeling frameworks were used to predict daily temperatures at 0.5m depth intervals for a set of diverse lakes in the U.S.
   states of Minnesota and Wisconsin. General Lake Model verion 2 process-Based (PB) models were configured and calibrated with training data to reduce root-mean squared error for 449 lakes (PBALL).
-  Uncalibrated models used default configurations (PB0; see Winslow et al. 2016 for details) and no parameters were adjusted according to model fit with observations for 7,144 lakes.
+  Uncalibrated models used default configurations (PB0; see Winslow et al. 2016 for details) and no parameters were adjusted according to model fit with observations for 7,150 lakes.
 
 cross-cites:
   -
@@ -12,24 +12,28 @@ cross-cites:
     title: >-
       A General Lake Model (GLM 3.0) for linking with high-frequency sensor data from the Global Lake Ecological Observatory Network (GLEON).
     pubdate: 2019
+    form: publication
     link: https://doi.org/10.5194/gmd-12-473-2019
   -
     authors: ['Luke A. Winslow','Gretchen J.A. Hansen','Jordan S. Read']
     title: >-
       Data release: A large-scale database of modeled contemporary and future water temperature data for 10,774 Michigan, Minnesota and Wisconsin Lakes
     pubdate: 2016
+    form: data release
     link: http://dx.doi.org/10.5066/F7DV1H10
   -
     authors: ['Xiaowei Jia', 'Jared Willard', 'Anuj Karpatne', 'Jordan S. Read', 'Jacob A. Zwart', 'Michael Steinbach', 'Vipin Kumar']
     title: >-
        Physics Guided RNNs for Modeling Dynamical Systems: A Case Study in Simulating Lake Temperature Profiles. Retrieved from https://arxiv.org/abs/1810.13075v2
     pubdate: 2019
+    form: publication
     link: https://arxiv.org/pdf/1810.02880.pdf
   -
     authors: ['USGS Advanced Research Computing']
     title: >-
        USGS Yeti Supercomputer
     pubdate: 2019
+    form: publication
     link: https://doi.org/10.5066/F7D798MJ
 
 entities:
@@ -57,7 +61,12 @@ entities:
         data-units: degrees C
   -
     data-name: 05_group_lakes.png
-    data-description: An image of the lakes that have temperature predictions for either model
+    data-description: >-
+      An image map of the lakes that have temperature predictions for either model on top
+      of a map of the U.S. Midwest with state and county boundaries. There are also multi-colored
+      rectangles with numeric values from 1 to 35 overlaid on the map, which correspond to the 
+      group number used in the filenames for the `predictions_*.zip` files to help users locate 
+      data if they are interested in a specific area. 
     attributes:
       -
         attr-label: PNG image
